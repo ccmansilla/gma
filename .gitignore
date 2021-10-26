@@ -1,4 +1,4 @@
-/uploads/*
+uploads/*.pdf
 .DS_Store
 
 application/cache/*
