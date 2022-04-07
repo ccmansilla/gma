@@ -20,8 +20,22 @@ function getMenu($role) {
     } elseif ($role == 'jefatura') {
         $menu = array(
             array(
-                'title' => 'Ordenes',
-                'url' => 'jefatura/index'
+                array(
+					'title' => 'Ordenes',
+					'url' => ''
+				),
+				array(
+					'title' => 'Orden día',
+					'url' => 'jefatura/index/od'
+				),
+				array(
+					'title' => 'Orden guarnicion',
+					'url' => 'jefatura/index/og'
+				),
+				array(
+					'title' => 'Orden reservada',
+					'url' => 'jefatura/index/or'
+				)
             ),
             array(
                 'title' => 'Salir',

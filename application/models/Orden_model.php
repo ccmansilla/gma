@@ -6,22 +6,19 @@ class Orden_model extends CI_Model {
             $this->load->database();
         }
 
-        public function get_list($limit = 0, $offset = 0, $where = '')
+        public function get_list($limit = 0, $offset = 0, $where = TRUE)
         {
             $offset = xss_clean($offset);
             $where = xss_clean($where);
 
             $this->db->from('orders');
             $this->db->order_by('number', 'desc');
-            if ($where !== ''){
-                    $this->db->where($where);
-            } 
+            $this->db->where($where);
             $result['data']  = $this->db->limit($limit, $offset)->get()->result_array();
 
             $this->db->from('orders');
-            if ($where !== ''){
-                    $this->db->where($where);
-            } 
+            $this->db->where($where);
+            
             $result['count'] = $this->db->count_all_results();
             return $result;
         }

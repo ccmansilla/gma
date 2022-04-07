@@ -9,10 +9,10 @@
 				</tr>
 			</thead>
 			<tbody>	
+				<?php echo form_open_multipart("dependencia/view/$type/$from");?>	
 				<?php foreach ($orders as $order): ?>
 					<tr>
 						<td>
-							<?php echo form_open_multipart("dependencia/view");?>	
 							<label for="visto">
 								<a href="#" onclick="cambiar_vista('<?php echo site_url('uploads/'.$order['file']);?>')" title="<?php echo $order['about'];?>">
 									<?php echo $order['type']."_".$order['number']."_".$order['year']; ?>
@@ -26,10 +26,10 @@
 										echo "<input type='checkbox' name='id_order' onchange='submit();' value='$id'>";
 									}
 								?>
-							</form>
 						</td>
 					</tr>
 				<?php endforeach; ?>
+				</form>
 			</tbody>
 		</table>
 		</div>

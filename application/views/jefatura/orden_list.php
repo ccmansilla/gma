@@ -9,7 +9,8 @@
 		<th>Tipo</th>
 		<th>Numero/Año</th>
 		<th>Tema</th>
-		<th>File</th>
+		<th>Archivo</th>
+		<th>Vistos</th>
 		<th>Accion</th>
 		</tr>
 	</thead>
@@ -19,7 +20,8 @@
 			<td><?php echo $order['type']; ?></td>
 	        <td><?php echo $order['number']."/".$order['year']; ?></td>
 			<td><?php echo $order['about']; ?></td>
-	        <td><a href='<?php echo site_url('uploads/'.$order['file']); ?>'>archivo</a></td>
+	        <td><a href='<?php echo site_url('uploads/'.$order['file']); ?>' target="_blank" >abrir</a></td>
+			<td><a href="">listar</a></td>
 	        <td><a class="btn btn-primary" href="<?= base_url('jefatura/order_edit/') . $order['id'] ?>" role="button">editar</a> <a class="btn btn-danger" href="<?=base_url('jefatura/order_delete/') . $order['id'] ?>" role="button">borrar</a></td>
 	    </tr>
 	<?php endforeach; ?>

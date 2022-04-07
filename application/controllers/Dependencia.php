@@ -19,9 +19,10 @@ class Dependencia extends CI_Controller {
 		
 		$type = ($this->input->post('tipo') != null)? $this->input->post('tipo') : $type;
 		$data['type'] = $type;
+		$data['from'] = $from;
 		$data['action'] = base_url(). 'dependencia/index/';
 		$where = "type = '$type'";
-		$limit = 2;
+		$limit = 10;
 		$id_user = $this->session->id_user;
 		$result = $this->orden_model->get_list_views_user($id_user, $limit, $from, $where);
 		$data['orders'] = $result['data'];
@@ -45,11 +46,11 @@ class Dependencia extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function view(){
+	public function view($type = 'od', $from = 0){
 		$this->load->helper('form');
 		$id_user = $this->session->id_user;
 		$this->view_model->insert($id_user);
-		redirect('dependencia/');
+		redirect("dependencia/index/$type/$from");
 	}
 
 }

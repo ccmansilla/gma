@@ -15,10 +15,14 @@ class Jefatura extends CI_Controller {
 		}
 	}
 
-    public function index($from = 0)
+    public function index($type = 'od', $from = 0)
 	{
-		$limit = 2;
-		$result = $this->orden_model->get_list($limit, $from);
+		$limit = 10;
+		$type = ($this->input->post('tipo') != null)? $this->input->post('tipo') : $type;
+		$data['type'] = $type;
+		$data['from'] = $from;
+		$where = "type = '$type'";
+		$result = $this->orden_model->get_list($limit, $from, $where);
 		$data['orders'] = $result['data'];
 		$data['title'] = 'Lista Ordenes';
 		$data['menu'] = getMenu($this->session->role);
@@ -171,5 +175,10 @@ class Jefatura extends CI_Controller {
 			exit();
 		}
 		redirect('jefatura/');
+	}
+
+	public function order_views($id_order){
+		$users = "";
+
 	}
 }
