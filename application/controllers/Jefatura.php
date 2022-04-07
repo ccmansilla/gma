@@ -10,7 +10,7 @@ class Jefatura extends CI_Controller {
 		if($role !== 'jefatura'){
 			show_404();
 		} else {
-			$this->load->model(array('orden_model', 'user_model'));
+			$this->load->model(array('orden_model', 'user_model', 'view_model'));
 			$this->load->helper(array('menu', 'functions'));
 		}
 	}
@@ -178,7 +178,7 @@ class Jefatura extends CI_Controller {
 	}
 
 	public function order_views($id_order){
-		$users = "";
-
+		$data['users'] = $this->view_model->get_list_users($id_order);
+		$this->load->view('jefatura/order_views', $data);
 	}
 }
