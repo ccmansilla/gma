@@ -46,7 +46,10 @@
         </div>
         
         <!-- Modal body -->
-        <div class="modal-body" id="modal__content">
+        <div class="modal-body">
+			<pre  id="modal__content">
+
+			</pre>
         </div>
         
         <!-- Modal footer -->
@@ -62,7 +65,20 @@
 </div>
 <script>
 	function modal(id){
-		$("#modal__content").text(id);
+		fetch('http://localhost/gma/jefatura/order_views/'+id)
+		.then((response) => {
+			return response.json();
+		})
+		.then((users) => {
+			$lista = '';
+			for (var i = 0; i < users.length; i++){
+				var user = users[i];
+				$lista += user['name'] + '<br>';
+			}
+			$("#modal__content").html($lista);
+			//console.log(users);
+		});
+		
 		$("#myModal").modal()
 	}
 </script>

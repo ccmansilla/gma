@@ -178,7 +178,8 @@ class Jefatura extends CI_Controller {
 	}
 
 	public function order_views($id_order){
-		$data['users'] = $this->view_model->get_list_users($id_order);
-		$this->load->view('jefatura/order_views', $data);
+		$users = $this->view_model->get_list_users($id_order);
+		$this->output->set_content_type('application/json');
+        $this->output->set_output(json_encode($users));
 	}
 }

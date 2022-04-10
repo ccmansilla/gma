@@ -6,10 +6,10 @@ class View_model extends CI_Model {
     }
 
     public function get_list_users($id_order){
-        $this->db->select('*');
+        $this->db->select('name');
         $this->db->from('views v');
-        $this->db->join('users u', "v.id_user = u.id AND v.id_order = $id_order", 'left');
-        $this->db->order_by('name', 'desc');
+        $this->db->join('users u', "v.id_user = u.id AND v.id_order = $id_order");
+        $this->db->order_by('name', 'asc');
         $result  = $this->db->get()->result_array();
         return $result;
     }
