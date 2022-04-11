@@ -209,4 +209,20 @@ class Jefatura extends CI_Controller {
 		$this->load->view('jefatura/volante_list', $data);
 		$this->load->view('templates/footer');
 	}
+
+	public function volante_create(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('fecha', 'Fecha', 'required');
+		$this->form_validation->set_rules('numero', 'Numero', 'required');
+		$this->form_validation->set_rules('year', 'Año', 'required');
+		$this->form_validation->set_rules('asunto', 'Asunto', 'required');
+		$this->form_validation->set_rules('destino', 'Destino', 'required');
+		//$this->form_validation->set_rules('file', 'File', 'required');
+		$data['title'] = 'Nuevo Volante Enviado';
+		$data['menu'] = getMenu($this->session->role);
+		$data['menu_active'] = 'Volantes';
+		$this->load->view('templates/header', $data);
+		$this->load->view('volante/volante_form', $data);
+		$this->load->view('templates/footer');
+	}
 }
