@@ -25,7 +25,10 @@
 			<td><a data-toggle="modal" onclick="modal(<?php echo $id; ?>)" href="#">   
 				<!-- href='<?php echo site_url('jefatura/order_views/'.$order['id']); ?>' target="_blank">
 	--> listar</a></td>
-	        <td><a class="btn btn-primary" href="<?= base_url('jefatura/order_edit/') . $order['id'] ?>" role="button">editar</a> <a class="btn btn-danger" href="<?=base_url('jefatura/order_delete/') . $order['id'] ?>" role="button">borrar</a></td>
+	        <td>
+				<a class="btn btn-primary" href="<?= base_url('jefatura/order_edit/') . $id ?>" role="button">editar</a> 
+				<a class="btn btn-danger" href="<?=base_url('jefatura/order_delete/') . $id ?>" role="button">borrar</a>
+			</td>
 	    </tr>
 	<?php endforeach; ?>
 	</tbody>
@@ -54,7 +57,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
         </div>
         
       </div>

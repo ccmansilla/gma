@@ -18,7 +18,6 @@ class Jefatura extends CI_Controller {
     public function index($type = 'od', $from = 0)
 	{
 		$limit = 10;
-		$type = ($this->input->post('tipo') != null)? $this->input->post('tipo') : $type;
 		$data['type'] = $type;
 		$data['from'] = $from;
 		$where = "type = '$type'";
@@ -181,5 +180,33 @@ class Jefatura extends CI_Controller {
 		$users = $this->view_model->get_list_users($id_order);
 		$this->output->set_content_type('application/json');
         $this->output->set_output(json_encode($users));
+	}
+
+	public function volante_list($modo = 'enviados', $from = 0)
+	{
+		$limit = 10;
+		$data['modo'] = $modo;
+		$data['from'] = $from;
+		$where = TRUE;
+		$result = $this->orden_model->get_list($limit, $from, $where);
+		$data['volantes'] = $result['data'];
+		$data['title'] = 'Lista Volantes Enviados';
+		$data['menu'] = getMenu($this->session->role);
+		$data['menu_active'] = 'Volantes';
+
+		#paginacion
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url('jefatura/volante_list/');
+		$config['total_rows'] = $result['count'];
+		$config['per_page'] = $limit;
+
+		$this->pagination->initialize($config);
+
+		$data['pagination'] = $this->pagination->create_links(); 
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('jefatura/volante_list', $data);
+		$this->load->view('templates/footer');
 	}
 }

@@ -68,7 +68,9 @@ INSERT INTO `users` (`id`, `role`, `name`, `nick`, `pass`) VALUES
 
 CREATE TABLE `views` (
   `id_order` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  FOREIGN KEY (id_order) REFERENCES orders (id)
+  ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -114,3 +116,16 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE `volantes` (
+  `id` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `numero` int(11) NOT NULL,
+  `year` int(4) NOT NULL,
+  `asunto` TEXT,
+  `enlace_archivo` VARCHAR(255),
+  `enlace_adjunto` VARCHAR(255),
+  `id_user_origen` int(11) NOT NULL,
+  `id_user_destino` int(11) NOT NULL,
+  `visto` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

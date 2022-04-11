@@ -38,6 +38,20 @@ function getMenu($role) {
 				)
             ),
             array(
+                array(
+					'title' => 'Volantes',
+					'url' => ''
+				),
+				array(
+					'title' => 'Enviados',
+					'url' => 'jefatura/volante_list/enviados'
+				),
+				array(
+					'title' => 'Recibidos',
+					'url' => 'jefatura/volantes_list/recibidos'
+				)
+            ),
+            array(
                 'title' => 'Salir',
                 'url' => 'auth/logout'
             )
@@ -63,6 +77,20 @@ function getMenu($role) {
 					'url' => 'dependencia/index/or'
 				)
 			),
+            array(
+                array(
+					'title' => 'Volantes',
+					'url' => ''
+				),
+				array(
+					'title' => 'Enviados',
+					'url' => 'dependencia/volante_list/enviados'
+				),
+				array(
+					'title' => 'Recibidos',
+					'url' => 'dependencia/volantes_list/recibidos'
+				)
+            ),
             array(
                 'title' => 'Salir',
                 'url' => 'auth/logout'
