@@ -10,7 +10,7 @@ class Jefatura extends CI_Controller {
 		if($role !== 'jefatura'){
 			show_404();
 		} else {
-			$this->load->model(array('orden_model', 'user_model', 'view_model'));
+			$this->load->model(array('orden_model', 'user_model', 'view_model', 'volante_model'));
 			$this->load->helper(array('menu', 'functions'));
 		}
 	}
@@ -218,11 +218,50 @@ class Jefatura extends CI_Controller {
 		$this->form_validation->set_rules('asunto', 'Asunto', 'required');
 		$this->form_validation->set_rules('destino', 'Destino', 'required');
 		//$this->form_validation->set_rules('file', 'File', 'required');
-		$data['title'] = 'Nuevo Volante Enviado';
-		$data['menu'] = getMenu($this->session->role);
-		$data['menu_active'] = 'Volantes';
-		$this->load->view('templates/header', $data);
-		$this->load->view('volante/volante_form', $data);
-		$this->load->view('templates/footer');
+		if ($this->form_validation->run() === FALSE)
+		{
+
+			$data['title'] = 'Nuevo Volante Enviado';
+			$data['menu'] = getMenu($this->session->role);
+			$data['menu_active'] = 'Volantes';
+			$data['action'] = "jefatura/volante_create";
+			$this->load->view('templates/header', $data);
+			$this->load->view('volante/volante_form', $data);
+			$this->load->view('templates/footer');
+
+		}
+		else
+		{
+			$fecha = $this->input->post('fecha');
+			$numero = $this->input->post('numero');
+			$year = date("y", strtotime($fecha)); 
+
+			$asunto = $this->input->post('asunto');
+			
+			$nombre = 'vol_'.$year.'_'.$numero.'';
+			$archivo = $nombre.'.pdf';
+			
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
+			$config['file_name'] = $nombre;
+
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload('file'))
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->load->view('jefatura/volante_form', $error);
+			}
+			else
+			{
+				
+				$upload_data = $this->upload->data();
+				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $tema,'enlace_archivo' => $archivo);
+				$this->volante_model->insert($data);
+				redirect('jefatura/volante_list');
+			}
+			
+		}
 	}
 }
