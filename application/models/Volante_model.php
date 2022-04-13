@@ -18,7 +18,6 @@ class Volante_model extends CI_Model {
 
         $this->db->from('volantes');
         $this->db->where($where);
-        
         $result['count'] = $this->db->count_all_results();
         return $result;
     }

@@ -188,7 +188,7 @@ class Jefatura extends CI_Controller {
 		$data['modo'] = $modo;
 		$data['from'] = $from;
 		$where = TRUE;
-		$result = $this->orden_model->get_list($limit, $from, $where);
+		$result = $this->volante_model->get_list($limit, $from, $where);
 		$data['volantes'] = $result['data'];
 		$data['title'] = 'Lista Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
@@ -237,8 +237,11 @@ class Jefatura extends CI_Controller {
 			$year = date("y", strtotime($fecha)); 
 
 			$asunto = $this->input->post('asunto');
+
+			$id_user_origen = $this->session->id_user;
+			$id_user_destino = $this->input->post('destino');
 			
-			$nombre = 'vol_'.$year.'_'.$numero.'';
+			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero";
 			$archivo = $nombre.'.pdf';
 			
 			$config['upload_path']          = './uploads/';
