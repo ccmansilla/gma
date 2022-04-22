@@ -241,7 +241,7 @@ class Jefatura extends CI_Controller {
 			$id_user_origen = $this->session->id_user;
 			$id_user_destino = $this->input->post('destino');
 			
-			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero";
+			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero;
 			$archivo = $nombre.'.pdf';
 			
 			$config['upload_path']          = './uploads/';
