@@ -27,6 +27,15 @@ class User_model extends CI_Model {
                 }
         }
 
+	
+        public function get_list_basic()
+        {
+                $query = $this->db->from('users');
+		$query->select('id, name');
+		$result = $query->get()->result_array();
+		return $result;
+        }
+
         public function get($id)
         {
                 $this->db->where('id', $id);

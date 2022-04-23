@@ -21,9 +21,7 @@
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="destino">Destino: </label>
-		<select class="form-control" id="destino" name="destino">
-			<option value="2">Dpto Ingenieria<option>
-		</select>
+		<?php echo form_dropdown('destino', $destinos); ?>
 	</div>
 
 	<div class="form-group">

@@ -9,3 +9,16 @@ function fechaEsp($fechaSQL){
         return NULL;
     }
 }
+
+/**
+ * Convierte en arreglo asociativo
+ */
+function simple_to_associative($array) {
+    $new_array = [];
+    foreach ($array as $row) {
+		$id = $row['id'];
+		$name = $row['name'];
+        $new_array[$id] = $name;
+    }
+    return $new_array;
+}

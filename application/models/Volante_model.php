@@ -30,6 +30,30 @@ class Volante_model extends CI_Model {
         return $result;
     }
 
+	public function get_list_recibidos($id_user, $limit = 10, $offset = 0, $where = "")
+    {
+        $offset = xss_clean($offset);
+        $where = xss_clean($where);
+
+        $this->db->from('volantes');
+        $this->db->order_by('id', 'desc');
+		if ($where != "") {
+			$this->db->where($where);
+		} else {
+			$this->db->where('id_user_destino', $id_user);
+		}
+        $result['data']  = $this->db->limit($limit, $offset)->get()->result_array();
+
+        $this->db->from('volantes');
+		if ($where != "") {
+			$this->db->where($where);
+		} else {
+			$this->db->where('id_user_destino', $id_user);
+		}
+        $result['count'] = $this->db->count_all_results();
+        return $result;
+    }
+
 	public function get($id)
     {
         $id = xss_clean($id);

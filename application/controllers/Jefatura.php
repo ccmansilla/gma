@@ -192,11 +192,12 @@ class Jefatura extends CI_Controller {
 		$data['title'] = 'Lista Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Volantes';
+		$data['new_url'] = basename('jefatura/volante_create');
 
 		#paginacion
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url('jefatura/volante_list/');
+		$config['base_url'] = base_url('jefatura/volante_enviados/');
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
 
@@ -206,6 +207,33 @@ class Jefatura extends CI_Controller {
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('volante/volante_enviados', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function volante_recibidos($from = 0)
+	{
+		$limit = 10;
+		$data['from'] = $from;
+		$id_user = $this->session->id_user;
+		$result = $this->volante_model->get_list_recibidos($id_user, $limit, $from);
+		$data['volantes'] = $result['data'];
+		$data['title'] = 'Lista Volantes Recibidos';
+		$data['menu'] = getMenu($this->session->role);
+		$data['menu_active'] = 'Volantes';
+
+		#paginacion
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url('jefatura/volante_recibidos/');
+		$config['total_rows'] = $result['count'];
+		$config['per_page'] = $limit;
+
+		$this->pagination->initialize($config);
+
+		$data['pagination'] = $this->pagination->create_links(); 
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('volante/volante_recibidos', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -224,6 +252,9 @@ class Jefatura extends CI_Controller {
 			$data['menu'] = getMenu($this->session->role);
 			$data['menu_active'] = 'Volantes';
 			$data['action'] = "jefatura/volante_create";
+			
+			$data['destinos'] = simple_to_associative($this->user_model->get_list_basic());
+
 			$this->load->view('templates/header', $data);
 			$this->load->view('volante/volante_form', $data);
 			$this->load->view('templates/footer');

@@ -48,7 +48,7 @@ function getMenu($role) {
 				),
 				array(
 					'title' => 'Recibidos',
-					'url' => 'jefatura/volantes_recibidos'
+					'url' => 'jefatura/volante_recibidos'
 				)
             ),
             array(
@@ -84,11 +84,11 @@ function getMenu($role) {
 				),
 				array(
 					'title' => 'Enviados',
-					'url' => 'dependencia/volante_list/enviados'
+					'url' => 'dependencia/volante_enviados'
 				),
 				array(
 					'title' => 'Recibidos',
-					'url' => 'dependencia/volantes_list/recibidos'
+					'url' => 'dependencia/volante_recibidos'
 				)
             ),
             array(
