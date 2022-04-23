@@ -28,10 +28,12 @@ class User_model extends CI_Model {
         }
 
 	
-        public function get_list_basic()
+        public function get_list_basic($id_user)
         {
                 $query = $this->db->from('users');
 		$query->select('id, name');
+		$query->where('name !=', 'Administrador');
+		$query->where('id !=', $id_user);
 		$result = $query->get()->result_array();
 		return $result;
         }

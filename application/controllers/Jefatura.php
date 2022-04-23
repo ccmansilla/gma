@@ -253,7 +253,7 @@ class Jefatura extends CI_Controller {
 			$data['menu_active'] = 'Volantes';
 			$data['action'] = "jefatura/volante_create";
 			
-			$data['destinos'] = simple_to_associative($this->user_model->get_list_basic());
+			$data['destinos'] = simple_to_associative($this->user_model->get_list_basic($this->session->id_user));
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('volante/volante_form', $data);
