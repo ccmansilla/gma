@@ -22,7 +22,7 @@
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="destino">Destino: </label>
 		<select class="form-control" id="destino" name="destino">
-			<option value="od">Dpto Ingenieria<option>
+			<option value="2">Dpto Ingenieria<option>
 		</select>
 	</div>
 

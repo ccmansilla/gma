@@ -8,5 +8,4 @@ function fechaEsp($fechaSQL){
     } else {
         return NULL;
     }
-    
 }

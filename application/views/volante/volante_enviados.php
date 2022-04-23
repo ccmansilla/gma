@@ -12,6 +12,7 @@
 		<th>Asunto</th>
 		<th>Archivo</th>
 		<th>Visto</th>
+		<th></th>
 		</tr>
 	</thead>
 	<tbody>

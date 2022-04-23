@@ -182,13 +182,12 @@ class Jefatura extends CI_Controller {
         $this->output->set_output(json_encode($users));
 	}
 
-	public function volante_list($modo = 'enviados', $from = 0)
+	public function volante_enviados($from = 0)
 	{
 		$limit = 10;
-		$data['modo'] = $modo;
 		$data['from'] = $from;
-		$where = TRUE;
-		$result = $this->volante_model->get_list($limit, $from, $where);
+		$id_user = $this->session->id_user;
+		$result = $this->volante_model->get_list_enviados($id_user, $limit, $from);
 		$data['volantes'] = $result['data'];
 		$data['title'] = 'Lista Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
@@ -206,7 +205,7 @@ class Jefatura extends CI_Controller {
 		$data['pagination'] = $this->pagination->create_links(); 
 
 		$this->load->view('templates/header', $data);
-		$this->load->view('jefatura/volante_list', $data);
+		$this->load->view('volante/volante_enviados', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -260,11 +259,26 @@ class Jefatura extends CI_Controller {
 			{
 				
 				$upload_data = $this->upload->data();
-				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $tema,'enlace_archivo' => $archivo);
+				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
+								'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
+								'id_user_destino' => $id_user_destino);
 				$this->volante_model->insert($data);
-				redirect('jefatura/volante_list');
+				redirect('jefatura/volante_enviados');
 			}
 			
 		}
+	}
+
+	public function volante_delete($id)
+	{
+		$volante = $this->volante_model->get($id);
+		$archivo = $volante['enlace_archivo'];
+		if(unlink('./uploads/'.$archivo)){	
+			$this->volante_model->delete($id);
+		} else {
+			echo "No se pudo borrar el archivo";
+			exit();
+		}
+		redirect('jefatura/volante_enviados');
 	}
 }

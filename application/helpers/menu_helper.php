@@ -44,11 +44,11 @@ function getMenu($role) {
 				),
 				array(
 					'title' => 'Enviados',
-					'url' => 'jefatura/volante_list/enviados'
+					'url' => 'jefatura/volante_enviados'
 				),
 				array(
 					'title' => 'Recibidos',
-					'url' => 'jefatura/volantes_list/recibidos'
+					'url' => 'jefatura/volantes_recibidos'
 				)
             ),
             array(
