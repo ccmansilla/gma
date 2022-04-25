@@ -23,7 +23,16 @@
 			<td><?php echo $volante['id_user_origen']; ?></td>
 			<td><?php echo $volante['asunto']; ?></td>
 	        <td><a href='<?php echo site_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" >abrir</a></td>
-			<td><?php echo $volante['visto']; ?></td>
+			<td>
+				<?php 
+					$visto = $volante['visto']; 
+					if($visto == 1){
+						echo "<input type='checkbox' name='' id='' checked='checked' disabled>";
+					} else {
+						echo "<input type='checkbox' name='' id=''>";
+					}
+				?>
+			</td>
 	    </tr>
 	<?php endforeach; ?>
 	</tbody>

@@ -25,7 +25,16 @@
 			<td><?php echo $volante['id_user_destino']; ?></td>
 			<td><?php echo $volante['asunto']; ?></td>
 	        <td><a href='<?php echo site_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" >abrir</a></td>
-			<td><?php echo $volante['visto']; ?></td>
+			<td>
+				<?php 
+					$visto = $volante['visto'];
+					if($visto == 1) {
+						echo 'Sí';
+					} else {
+						echo 'No';	
+					}
+				?>
+			</td>
 	        <td>
 				<a class="btn btn-primary" href="<?= base_url('jefatura/volante_edit/') . $id ?>" role="button">editar</a> 
 				<a class="btn btn-danger" href="<?=base_url('jefatura/volante_delete/') . $id ?>" role="button">borrar</a>
@@ -38,7 +47,6 @@
 <div class="pagination">
 	<?= $pagination ?>
 </div>
-
 </div>
 </div>
 
