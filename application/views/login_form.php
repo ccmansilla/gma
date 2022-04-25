@@ -19,7 +19,9 @@
             body{
                 width: 100%;
                 height:100%;
-                background-color: #f2f2f2;
+                background-image: url("assets/images/fondo_login.jpg");
+				background-repeat: no-repeat;
+				background-size: cover;
             }
 
             .main-section{
@@ -32,9 +34,14 @@
                 padding: 10px;
             }
 
+			.title h1 {
+				font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				color: white;
+				text-shadow: 2px 2px 2px black;
+			}
+
             .modal-content{
-                background-color: #1877f2;;
-                opacity: .85;
+                background-color: #305282ad;
                 padding: 0 20px;
                 box-shadow: 5px 5px 5px #000;
                 border: 0;
@@ -62,10 +69,10 @@
     <body>
         
         <div class="modal-dialog text-center">
-            <div class="col-sm-8 main-section">
+            <div class="col-sm-10 main-section">
                 <div class="modal-content">
                     <div class="col-12 title">
-                        <img src="<?= base_url() . 'assets/images/gma.png' ?>" alt="GMA"/>
+						<h1>Mantenimiento</h1>
                     </div>
                     <?= form_open('/auth/login') ?>
                     <?php
