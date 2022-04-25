@@ -63,7 +63,7 @@
 
         </style>
             
-        <title>GMA</title>
+        <title>Mantenimiento</title>
         
     </head>
     <body>
@@ -94,7 +94,7 @@
                         );
 
                         $submit = array(
-                            'class' => 'btn btn-success',
+                            'class' => 'btn btn-outline-light',
                             'type' => 'submit',
                             'value' => 'Entrar'
                         );
