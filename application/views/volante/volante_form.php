@@ -21,7 +21,7 @@
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="destino">Destino: </label>
-		<?php echo form_dropdown('destino', $destinos); ?>
+		<?php echo form_dropdown('destino', $destinos, '', "class='form-control'"); ?>
 	</div>
 
 	<div class="form-group">
@@ -33,7 +33,7 @@
 	
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="nombre">Archivo: </label>
-		<input type="file" name="file" size="20" />
+		<input type="file" class="form-control-file" name="file" size="20" />
 	<br />
 
     <div class="col-sm-offset-2 col-sm-6">
