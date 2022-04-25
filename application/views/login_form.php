@@ -19,7 +19,7 @@
             body{
                 width: 100%;
                 height:100%;
-                background-image: url("assets/images/fondo_login.jpg");
+                background-image: url("<?= base_url('assets/images/fondo_login.jpg');?>");
 				background-repeat: no-repeat;
 				background-size: cover;
             }
@@ -80,7 +80,8 @@
                             'name' => 'nick',
                             'class' => 'form-control',
                             'value' => (isset($nick))? $nick : '',
-                            'placeholder' => 'Usuario'
+                            'placeholder' => 'Usuario',
+							'required' => 'required'
                         );
 
                         $pass = array(
@@ -88,7 +89,8 @@
                             'class' => 'form-control',
                             'type' => 'password',
                             'value' => (isset($pass))? $pass : '',
-                            'placeholder' => 'Contraseña'
+                            'placeholder' => 'Contraseña',
+							'required' => 'required'
                         );
 
                         $submit = array(
