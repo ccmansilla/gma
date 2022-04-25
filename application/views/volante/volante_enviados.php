@@ -1,18 +1,19 @@
 <div class="row">
 <div class="col-sm-12">
+	<h1>Lista de Volantes Enviados</h1>
 <br>
-<a class="btn btn-success" href="<?= $new_url; ?>" role="button">Nuevo</a>
+<a class="btn btn-success mb-2" href="<?= $new_url; ?>" role="button">Nuevo</a>
 <div class="table-orden">          
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-		<th>Numero/Año</th>
-		<th>Fecha</th>
-		<th>Destino</th>
-		<th>Asunto</th>
-		<th>Archivo</th>
-		<th>Visto</th>
-		<th></th>
+		<th style="width: 6%;">Nº/Año</th>
+		<th style="width: 9%;">Fecha</th>
+		<th style="width: 18%;">Destino</th>
+		<th style="width: 40%;">Asunto</th>
+		<th style="width: 6%;">Archivo</th>
+		<th style="width: 6%;">Visto</th>
+		<th style="width: 15%;"></th>
 		</tr>
 	</thead>
 	<tbody>

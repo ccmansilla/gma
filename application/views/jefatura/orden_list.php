@@ -1,17 +1,18 @@
 <div class="row">
 <div class="col-sm-12">
+<h1><?= $title; ?></h1>
 <br>
-<a class="btn btn-success" href="<?=base_url()?>jefatura/order_create" role="button">Nuevo</a>
+<a class="btn btn-success mb-2" href="<?=base_url()?>jefatura/order_create" role="button">Nuevo</a>
 <div class="table-orden">          
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-		<th>Tipo</th>
-		<th>Numero/Año</th>
-		<th>Tema</th>
-		<th>Archivo</th>
-		<th>Vistos</th>
-		<th>Accion</th>
+		<th style="width: 5%;">Tipo</th>
+		<th style="width: 9%;">Nº/Año</th>
+		<th style="width: 50%;">Tema</th>
+		<th style="width: 9%;">Archivo</th>
+		<th style="width: 9%;">Vistos</th>
+		<th style="width: 18%;">Accion</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,7 +26,7 @@
 			<td><a data-toggle="modal" onclick="modal(<?php echo $id; ?>)" href="#">   
 				<!-- href='<?php echo site_url('jefatura/order_views/'.$order['id']); ?>' target="_blank">
 	--> listar</a></td>
-	        <td>
+	        <td class="text-center">
 				<a class="btn btn-primary" href="<?= base_url('jefatura/order_edit/') . $id ?>" role="button">editar</a> 
 				<a class="btn btn-danger" href="<?=base_url('jefatura/order_delete/') . $id ?>" role="button">borrar</a>
 			</td>

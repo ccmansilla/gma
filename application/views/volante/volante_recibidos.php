@@ -1,16 +1,17 @@
 <div class="row">
 <div class="col-sm-12">
+	<h1>Lista de Volantes Recibidos</h1>
 <br>
 <div class="table-orden">          
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-		<th>Numero/Año</th>
-		<th>Fecha</th>
-		<th>Origen</th>
-		<th>Asunto</th>
-		<th>Archivo</th>
-		<th>Visto</th>
+		<th style="width: 6%;">Nº/Año</th>
+		<th style="width: 9%;">Fecha</th>
+		<th style="width: 17%;">Origen</th>
+		<th style="width: 50%;">Asunto</th>
+		<th style="width: 9%;">Archivo</th>
+		<th style="width: 9%;">Visto</th>
 		</tr>
 	</thead>
 	<tbody>

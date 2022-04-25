@@ -22,8 +22,15 @@ class Jefatura extends CI_Controller {
 		$data['from'] = $from;
 		$where = "type = '$type'";
 		$result = $this->orden_model->get_list($limit, $from, $where);
-		$data['orders'] = $result['data'];
-		$data['title'] = 'Lista Ordenes';
+		$data['orders'] = $result['data'];		
+		$data['title'] = 'Lista Ordenes del Día';
+		if($type == 'og'){
+			$data['title'] = 'Lista Ordenes de Guarnicion';
+		} else {
+			if($type == 'or'){
+				$data['title'] = 'Lista Ordenes Reservada';
+			}
+		}
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Ordenes';
 
