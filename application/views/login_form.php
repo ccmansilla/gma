@@ -20,11 +20,20 @@
 
             body{
                 width: 100%;
-                height:100%;
+                height:100vh;
                 background-image: url("<?= base_url('assets/images/fondo.png');?>");
 				background-repeat: no-repeat;
 				background-size: cover;
             }
+
+			.contenedor {
+				width: 100%;
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: end;
+				align-items: center;
+			}
 
             .filtro {
                 position: absolute;
@@ -32,21 +41,17 @@
                 left: 0px;
                 background-color: #3532326e;
                 width: 100%;
-                height:100%;
-            }
-
-            .main-section{
-                margin:0 auto;
-                margin-top:50%;
-                padding: 0;
+                height:100vh;
             }
 
             .logo {
-                width: 140px;
-                height: 200px;
+                width: 120px;
+                height: 180px;
             }
 
             .title{
+				width: 300px;
+				height: 260px;
                 padding: 10px;
             }
 
@@ -56,11 +61,10 @@
 				text-shadow: 2px 2px 2px black;
 			}
 
-            .modal-content{
-                background: none;
-                border: none;
-                padding: 0 20px;
-            }
+			.login {
+				width: 300px;
+				height: 220px;
+			}
 
             .form-group input{
                 background: none;
@@ -93,53 +97,51 @@
     </head>
     <body>
         <div class="filtro">
-        <div class="modal-dialog text-center">
-            <div class="col-sm-10 main-section">
-                <div class="modal-content">
-                    <div class="col-12 title">
-                        <div>
-                            <img src="<?= base_url('assets/images/escudo.png');?>" class="logo" alt="">
-                        </div>
-                        <div>
-                            <h1>Mantenimiento</h1>
-                        </div>
-                    </div>
-                    <?= form_open('/auth/login') ?>
-                    <?php
-                        $nick = array(
-                            'name' => 'nick',
-                            'class' => 'form-control',
-                            'value' => (isset($nick))? $nick : '',
-                            'placeholder' => 'Usuario',
+			<div class="contenedor">
+				<div class="title text-center">
+					<div>
+						<img src="<?= base_url('assets/images/escudo.png');?>" class="logo" alt="">
+					</div>
+					<div>
+						<h1>Mantenimiento</h1>
+					</div>
+				</div>
+				<div class="login text-center">
+					<?= form_open('/auth/login') ?>
+					<?php
+						$nick = array(
+							'name' => 'nick',
+							'class' => 'form-control',
+							'value' => (isset($nick))? $nick : '',
+							'placeholder' => 'Usuario',
 							'required' => 'required'
-                        );
+						);
 
-                        $pass = array(
-                            'name' => 'pass',
-                            'class' => 'form-control',
-                            'type' => 'password',
-                            'value' => (isset($pass))? $pass : '',
-                            'placeholder' => 'Contraseña',
+						$pass = array(
+							'name' => 'pass',
+							'class' => 'form-control',
+							'type' => 'password',
+							'value' => (isset($pass))? $pass : '',
+							'placeholder' => 'Contraseña',
 							'required' => 'required'
-                        );
+						);
 
-                        $submit = array(
-                            'class' => 'btn btn-outline-light',
-                            'type' => 'submit',
-                            'value' => 'Entrar'
-                        );
-                    ?>
-                    <div class="form-group"><?=form_input($nick);?></div>
-                    <div class="alert-danger" role="alert"><?= form_error('nick'); ?></div>
-                    <div class="form-group"><?=form_input($pass);?></div>
-                    <div class="alert-danger" role="alert"><?= form_error('pass'); ?></div>
-                    <div class="alert-danger" role="alert"><?= (isset($msg))? $msg : "" ?></div>
-                    <br>
-                    <div><?= form_submit($submit);?></div>
-                    <?= form_close();?>
-                </div>
-            </div>
-        </div>
+						$submit = array(
+							'class' => 'btn btn-outline-light',
+							'type' => 'submit',
+							'value' => 'Entrar'
+						);
+					?>
+					<div class="form-group"><?=form_input($nick);?></div>
+					<div class="alert-danger" role="alert"><?= form_error('nick'); ?></div>
+					<div class="form-group"><?=form_input($pass);?></div>
+					<div class="alert-danger" role="alert"><?= form_error('pass'); ?></div>
+					<div class="alert-danger" role="alert"><?= (isset($msg))? $msg : "" ?></div>
+					<br>
+					<div><?= form_submit($submit);?></div>
+					<?= form_close();?>
+				</div>
+			</div>
         </div>
 
     <script src="<?= base_url('/assets/js/jquery-3.5.1.slim.min.js') ?>" ></script>
