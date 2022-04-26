@@ -21,7 +21,8 @@ class Auth extends CI_Controller {
                 'label' => 'Usuario',
                 'rules' => 'required|trim|min_length[3]',
                 'errors' => array(
-                    'required' => '%s requerido.'
+                    'required' => '%s requerido.',
+                    'min_length' => '%s debe tener una longitud minima de 3 caracteres.'
                 )
             ),
             array(
@@ -29,7 +30,8 @@ class Auth extends CI_Controller {
                 'label' => 'Contraseña',
                 'rules' => 'required|trim|min_length[3]',
                 'errors' => array(
-                    'required' => '%s requerida.'
+                    'required' => '%s requerida.',
+                    'min_length' => '%s debe tener una longitud minima de 3 caracteres.'
                 )
             )
         );

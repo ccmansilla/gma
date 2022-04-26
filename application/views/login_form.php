@@ -21,15 +21,29 @@
             body{
                 width: 100%;
                 height:100%;
-                background-image: url("<?= base_url('assets/images/fondo_login.jpg');?>");
+                background-image: url("<?= base_url('assets/images/fondo_login.png');?>");
 				background-repeat: no-repeat;
 				background-size: cover;
             }
 
+            .filtro {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background-color: #3532326e;
+                width: 100%;
+                height:100%;
+            }
+
             .main-section{
                 margin:0 auto;
-                margin-top:25%;
+                margin-top:50%;
                 padding: 0;
+            }
+
+            .logo {
+                width: 140px;
+                height: 200px;
             }
 
             .title{
@@ -43,18 +57,23 @@
 			}
 
             .modal-content{
-                background-color: #305282ad;
+                background: none;
+                border: none;
                 padding: 0 20px;
-                box-shadow: 5px 5px 5px #000;
-                border: 0;
             }
 
             .form-group input{
+                background: none;
+                color: white;
                 height: 42px;
                 font-size: 18px;
-                border:1px black solid;
+                border:1px white solid;
                 padding-left: 54px;
                 border-radius: 5px;
+            }
+
+            .form-group input::placeholder{
+                color: white;
             }
 
             input[type=submit]{
@@ -69,12 +88,17 @@
         
     </head>
     <body>
-        
+        <div class="filtro">
         <div class="modal-dialog text-center">
             <div class="col-sm-10 main-section">
                 <div class="modal-content">
                     <div class="col-12 title">
-						<h1>Mantenimiento</h1>
+                        <div>
+                            <img src="<?= base_url('assets/images/escudo.png');?>" class="logo" alt="">
+                        </div>
+                        <div>
+                            <h1>Mantenimiento</h1>
+                        </div>
                     </div>
                     <?= form_open('/auth/login') ?>
                     <?php
@@ -111,6 +135,7 @@
                     <?= form_close();?>
                 </div>
             </div>
+        </div>
         </div>
 
     <script src="<?= base_url('/assets/js/jquery-3.5.1.slim.min.js') ?>" ></script>

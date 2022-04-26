@@ -17,6 +17,11 @@
 				body{
 					background-color: #f2f2f2;
 				}
+
+                .header__borde {
+                    border-bottom: 1px black solid;
+                    box-shadow: 0px 5px 5px #000;
+                }
 				
                 table, tr, th, td{
                     border: 1px solid black;
@@ -85,14 +90,11 @@
                 }
 				
 				.logo{
-					height: 160px;
-					border:0;
-					border-radius: .3rem;
-					padding: 2rem 2rem;
-					margin-bottom: 2rem;
-					background-color: #1877f2;
-					box-shadow: 5px 5px 5px #000;
-					color: white;
+                    width: 70px;
+					height: 100px;
+                    margin-left: 10px;
+                    margin-right: 20px;
+					border: 0;
 				}
 				
 				.nav-link{
@@ -103,7 +105,8 @@
 				}
 				
 				.username{
-					color: white;
+					color: rgba(0,0,0,.5);
+                    font-weight: bold;
 				}
 
                 #view_container {
@@ -136,44 +139,46 @@
                 
         </head>
         <body>
-        <div id="container">
-		<div class="logo">
-			<img src="<?= base_url() . 'assets/images/gma.png' ?>" alt="GMA"/>
-			<h6>Grupo Mantenimiento Administracion</h6>
-		</div>
-        <nav class="navbar navbar-dark bg-dark navbar-expand-md border-bottom border-info"> 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav">
-                    <?php foreach ($menu as $item) { ?>
-						<?php if(count($item) > 2) {?>
-							<li class="nav-item dropdown">
-							<?php $i = 1;?>
-							<?php foreach ($item as $subitem) { ?>
-							<?php if ($i == 1) { ?>
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<?= $subitem['title'] ?>
-								</a>
-								<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-							<?php } else {?>
-								<a class="dropdown-item" href="<?= base_url() . $subitem['url'] ?>"><?= $subitem['title'] ?></a>
-							<?php } ?>
-							<?php $i++;?>
-							<?php } ?>
-							</div>
-							</li>
-						<?php } else {?>
-						<li class="nav-item <?php echo ($menu_active == $item['title'])? "active": ""; ?>">
-							<a class="nav-link" href="<?= base_url() . $item['url'] ?>"><?= $item['title'] ?></a>
-						</li>
-						<?php }?>
-                    <?php } ?> 
+        <header class="container-fluid header__borde">      
+            <nav class="navbar navbar-light navbar-expand-md"> 
+                <a href="#">
+                    <img class="logo" src="<?= base_url('assets/images/escudo.png'); ?>" alt="">
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav">
+                        <?php foreach ($menu as $item) { ?>
+                            <?php if(count($item) > 2) {?>
+                                <li class="nav-item dropdown">
+                                <?php $i = 1;?>
+                                <?php foreach ($item as $subitem) { ?>
+                                <?php if ($i == 1) { ?>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <?= $subitem['title'] ?>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                <?php } else {?>
+                                    <a class="dropdown-item" href="<?= base_url() . $subitem['url'] ?>"><?= $subitem['title'] ?></a>
+                                <?php } ?>
+                                <?php $i++;?>
+                                <?php } ?>
+                                </div>
+                                </li>
+                            <?php } else {?>
+                            <li class="nav-item <?php echo ($menu_active == $item['title'])? "active": ""; ?>">
+                                <a class="nav-link" href="<?= base_url() . $item['url'] ?>"><?= $item['title'] ?></a>
+                            </li>
+                            <?php }?>
+                        <?php } ?> 
+                    </div>
                 </div>
-            </div>
-            <div class="navbar-nav navbar-right">
-                    <span class="username"><?= $this->session->name ?></span>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav> 
+                <div class="navbar-nav navbar-right">
+                        <span class="username"><?= $this->session->name ?></span>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </header> 
+        
+        <div id="container" class="conatiner">
             <div id="body">
