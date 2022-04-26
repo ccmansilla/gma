@@ -7,6 +7,8 @@
         
         <link rel="stylesheet" href="<?= base_url('/assets/css/bootstrap.min.css')?>">
 
+		<link rel="shortcut icon" href="<?= base_url('favicon.png');?>" type="image/png">
+
         <style>
             * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
 
