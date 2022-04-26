@@ -9,9 +9,9 @@
 	    <label class="control-label col-sm-2" for="tipo">Tipo: </label>
 		<select class="form-control" id="tipo" name="tipo">
 			<?php $type = (isset($order))? $order['type'] : ''?>
-			<option value="od" <?= ($type == 'od')? 'selected' : ''?> >Orden del Día<option>
-			<option value="og" <?= ($type == 'og')? 'selected' : ''?> >Orden de Guarnición<option>
-			<option value="or" <?= ($type == 'or')? 'selected' : ''?> >Orden Reservada<option>
+			<option value="od" <?= ($type == 'od')? 'selected' : ''?> >Orden del Día</option>
+			<option value="og" <?= ($type == 'og')? 'selected' : ''?> >Orden de Guarnición</option>
+			<option value="or" <?= ($type == 'or')? 'selected' : ''?> >Orden Reservada</option>
 		</select>
 	</div>
 	
@@ -35,7 +35,7 @@
 		<input type="file" name="file" size="20" />
 	<br />
 
-    <div class="col-sm-offset-2 col-sm-6">
+    <div class="col-sm-offset-2 text-center pt-5">
     	<input type="submit" class="btn btn-success" name="submit" value="Guardar" />
         <button class="btn btn-danger" onclick="window.history.back();" >Cancelar</button>
     </div>

@@ -8,7 +8,7 @@
 	<thead class="thead-dark">
 		<tr>
 		<th style="width: 5%;">Tipo</th>
-		<th style="width: 9%;">Nº/Año</th>
+		<th style="width: 9%;">Número</th>
 		<th style="width: 50%;">Tema</th>
 		<th style="width: 9%;">Archivo</th>
 		<th style="width: 9%;">Vistos</th>
@@ -23,9 +23,11 @@
 	        <td><?php echo $order['number']."/".$order['year']; ?></td>
 			<td><?php echo $order['about']; ?></td>
 	        <td><a href='<?php echo site_url('uploads/'.$order['file']); ?>' target="_blank" >abrir</a></td>
-			<td><a data-toggle="modal" onclick="modal(<?php echo $id; ?>)" href="#">   
-				<!-- href='<?php echo site_url('jefatura/order_views/'.$order['id']); ?>' target="_blank">
-	--> listar</a></td>
+			<td>
+				<a data-toggle="modal" onclick="modal(<?php echo $id; ?>)" href="#">   
+					listar
+				</a>
+			</td>
 	        <td class="text-center">
 				<a class="btn btn-primary" href="<?= base_url('jefatura/order_edit/') . $id ?>" role="button">editar</a> 
 				<a class="btn btn-danger" href="<?=base_url('jefatura/order_delete/') . $id ?>" role="button">borrar</a>

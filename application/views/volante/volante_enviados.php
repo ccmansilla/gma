@@ -7,7 +7,7 @@
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-		<th style="width: 6%;">Nº/Año</th>
+		<th style="width: 6%;">Número</th>
 		<th style="width: 9%;">Fecha</th>
 		<th style="width: 18%;">Destino</th>
 		<th style="width: 40%;">Asunto</th>
@@ -21,7 +21,7 @@
 		<?php $id = $volante['id']; ?>
 	    <tr>
 	        <td><?php echo $volante['numero']."/".$volante['year']; ?></td>
-			<td><?php echo $volante['fecha']; ?></td>
+			<td><?php echo fechaEsp($volante['fecha']); ?></td>
 			<td><?php echo $volante['id_user_destino']; ?></td>
 			<td><?php echo $volante['asunto']; ?></td>
 	        <td><a href='<?php echo site_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" >abrir</a></td>

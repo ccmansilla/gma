@@ -36,9 +36,9 @@
 		<input type="file" class="form-control-file" name="file" size="20" />
 	<br />
 
-    <div class="col-sm-offset-2 col-sm-6">
+    <div class="col-sm-offset-2 text-center pt-5">
     	<input type="submit" class="btn btn-success" name="submit" value="Guardar" />
-        <button class="btn btn-danger" href="<?= base_url("jefatura/volante_list/enviados");?>" >Cancelar</button>
+        <button class="btn btn-danger"  onclick="window.history.back();" >Cancelar</button>
     </div>
 </form>
 </div>

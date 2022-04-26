@@ -70,7 +70,7 @@
                 }
 
                 #formulario{
-                    background-color: gray;
+                    background-color: #92967D;
                     opacity: .85;
 					margin: 20px;
                     padding: 20px;
