@@ -43,10 +43,6 @@
                     border-bottom: 1px black solid;
                     box-shadow: 0px 5px 5px #000;
                 }
-				
-                table, tr, th, td{
-                    /*border: 1px solid black;*/
-                }
 
                 .table td, .table thead th{
                     border: 1px solid black;
@@ -162,6 +158,15 @@
                     align-items: center;
                     justify-content: space-around;
                 }
+
+				.btn {
+					border: 1px black solid;
+				}
+
+				.btn:hover {
+					border: 1px black solid;
+				}
+				
             </style>
                 
         </head>

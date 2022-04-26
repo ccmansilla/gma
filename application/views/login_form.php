@@ -63,7 +63,7 @@
 
 			.login {
 				width: 300px;
-				height: 220px;
+				height: 320px;
 			}
 
             .form-group input{

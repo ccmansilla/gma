@@ -19,7 +19,7 @@ class Admin extends CI_Controller {
             $limit = 2;
             $result = $this->user_model->get_list($limit, $from);
             $data['users'] = $result['data'];
-            $data['title'] = 'Lista Usuarios';
+            $data['title'] = 'Usuarios';
             $data['menu'] = getMenu($this->session->role);
 			$data['menu_active'] = 'Usuarios';
 
@@ -78,7 +78,7 @@ class Admin extends CI_Controller {
 
             if ($this->form_validation->run() === FALSE)
             {
-                $data['title'] = 'Crear Usuario';
+                $data['title'] = 'Nuevo Usuario';
                 $data['menu'] = getMenu($this->session->role);
 				$data['menu_active'] = 'Usuarios';
                 $data['action'] = "admin/user_create";
