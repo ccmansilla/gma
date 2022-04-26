@@ -21,7 +21,7 @@
             body{
                 width: 100%;
                 height:100%;
-                background-image: url("<?= base_url('assets/images/fondo_login.png');?>");
+                background-image: url("<?= base_url('assets/images/fondo.png');?>");
 				background-repeat: no-repeat;
 				background-size: cover;
             }
@@ -73,7 +73,11 @@
             }
 
             .form-group input::placeholder{
-                color: white;
+                color: silver;
+            }
+
+            .form-group input::placeholder:focus{
+                color: gray;
             }
 
             input[type=submit]{

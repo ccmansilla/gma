@@ -23,12 +23,12 @@ class Jefatura extends CI_Controller {
 		$where = "type = '$type'";
 		$result = $this->orden_model->get_list($limit, $from, $where);
 		$data['orders'] = $result['data'];		
-		$data['title'] = 'Lista Ordenes del Día';
+		$data['title'] = 'Ordenes del Día';
 		if($type == 'og'){
-			$data['title'] = 'Lista Ordenes de Guarnicion';
+			$data['title'] = 'Ordenes de Guarnicion';
 		} else {
 			if($type == 'or'){
-				$data['title'] = 'Lista Ordenes Reservada';
+				$data['title'] = 'Ordenes Reservada';
 			}
 		}
 		$data['menu'] = getMenu($this->session->role);
@@ -196,7 +196,7 @@ class Jefatura extends CI_Controller {
 		$id_user = $this->session->id_user;
 		$result = $this->volante_model->get_list_enviados($id_user, $limit, $from);
 		$data['volantes'] = $result['data'];
-		$data['title'] = 'Lista Volantes Enviados';
+		$data['title'] = 'Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Volantes';
 		$data['new_url'] = basename('jefatura/volante_create');
@@ -224,7 +224,7 @@ class Jefatura extends CI_Controller {
 		$id_user = $this->session->id_user;
 		$result = $this->volante_model->get_list_recibidos($id_user, $limit, $from);
 		$data['volantes'] = $result['data'];
-		$data['title'] = 'Lista Volantes Recibidos';
+		$data['title'] = 'Volantes Recibidos';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Volantes';
 

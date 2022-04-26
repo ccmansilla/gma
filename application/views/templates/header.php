@@ -18,6 +18,27 @@
 					background-color: #f2f2f2;
 				}
 
+                .nav__bg {
+                    background-color:  #5584AC;
+                }
+
+                .nav__dropdown__bg {
+                    background-color: #F6F2D4;
+                }
+
+                .nav__dropdown__color {
+                    color: gray;
+                }
+
+                .dropdown-item:hover{
+                    color: black !important;
+                }
+
+                
+                .dropdown-item:focus{
+                    background-color: white;
+                }
+
                 .header__borde {
                     border-bottom: 1px black solid;
                     box-shadow: 0px 5px 5px #000;
@@ -98,14 +119,20 @@
 				}
 				
 				.nav-link{
+                    color: rgba(255,255,255,.8) !important;
 					font-weight: bold;
 				}
+
+                .dropdown-item:hover {
+                    color: blue;
+                }
+
 				.thead-dark th{
 					background-color: gray !important;
 				}
 				
 				.username{
-					color: rgba(0,0,0,.5);
+					color: rgba(255,255,255,.8);
                     font-weight: bold;
 				}
 
@@ -139,8 +166,8 @@
                 
         </head>
         <body>
-        <header class="container-fluid header__borde">      
-            <nav class="navbar navbar-light navbar-expand-md"> 
+        <header class="container-fluid nav__bg header__borde">      
+            <nav class="navbar navbar-dark nav__bg navbar-expand-md"> 
                 <a href="#">
                     <img class="logo" src="<?= base_url('assets/images/escudo.png'); ?>" alt="">
                 </a>
@@ -155,9 +182,9 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <?= $subitem['title'] ?>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                    <div class="dropdown-menu nav__dropdown__bg" aria-labelledby="navbarDropdown1">
                                 <?php } else {?>
-                                    <a class="dropdown-item" href="<?= base_url() . $subitem['url'] ?>"><?= $subitem['title'] ?></a>
+                                    <a class="dropdown-item nav__dropdown__color" href="<?= base_url() . $subitem['url'] ?>"><?= $subitem['title'] ?></a>
                                 <?php } ?>
                                 <?php $i++;?>
                                 <?php } ?>

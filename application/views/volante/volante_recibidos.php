@@ -1,6 +1,6 @@
 <div class="row">
 <div class="col-sm-12">
-	<h1>Lista de Volantes Recibidos</h1>
+	<h1><?= $title ?></h1>
 <br>
 <div class="table-orden">          
 <table class="table">

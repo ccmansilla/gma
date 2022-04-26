@@ -25,15 +25,15 @@ function getMenu($role) {
 					'url' => ''
 				),
 				array(
-					'title' => 'Orden día',
+					'title' => 'Ordenes del día',
 					'url' => 'jefatura/index/od'
 				),
 				array(
-					'title' => 'Orden guarnicion',
+					'title' => 'Ordenes de guarnicion',
 					'url' => 'jefatura/index/og'
 				),
 				array(
-					'title' => 'Orden reservada',
+					'title' => 'Ordenes reservada',
 					'url' => 'jefatura/index/or'
 				)
             ),
@@ -43,11 +43,11 @@ function getMenu($role) {
 					'url' => ''
 				),
 				array(
-					'title' => 'Enviados',
+					'title' => 'Volantes enviados',
 					'url' => 'jefatura/volante_enviados'
 				),
 				array(
-					'title' => 'Recibidos',
+					'title' => 'Volantes recibidos',
 					'url' => 'jefatura/volante_recibidos'
 				)
             ),
@@ -65,15 +65,15 @@ function getMenu($role) {
 					'url' => ''
 				),
 				array(
-					'title' => 'Orden día',
+					'title' => 'Ordenes del día',
 					'url' => 'dependencia/index/od'
 				),
 				array(
-					'title' => 'Orden guarnicion',
+					'title' => 'Ordenes de guarnicion',
 					'url' => 'dependencia/index/og'
 				),
 				array(
-					'title' => 'Orden reservada',
+					'title' => 'Ordenes reservada',
 					'url' => 'dependencia/index/or'
 				)
 			),
@@ -83,11 +83,11 @@ function getMenu($role) {
 					'url' => ''
 				),
 				array(
-					'title' => 'Enviados',
+					'title' => 'Volantes enviados',
 					'url' => 'dependencia/volante_enviados'
 				),
 				array(
-					'title' => 'Recibidos',
+					'title' => 'Volantes recibidos',
 					'url' => 'dependencia/volante_recibidos'
 				)
             ),
