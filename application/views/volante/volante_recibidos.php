@@ -3,7 +3,7 @@
 	<h1><?= $title ?></h1>
 <br>
 <div class="table-orden">          
-<table class="table">
+<table class="table table-bordered">
 	<thead class="thead-dark">
 		<tr>
 		<th style="width: 6%;">Número</th>

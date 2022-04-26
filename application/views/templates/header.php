@@ -19,7 +19,7 @@
 				}
 
                 .nav__bg {
-                    background-color:  #5584AC;
+                    background-color:  #245C8C;
                 }
 
                 .nav__dropdown__bg {
@@ -45,7 +45,7 @@
                 }
 				
                 table, tr, th, td{
-                    border: 1px solid black;
+                    /*border: 1px solid black;*/
                 }
 
                 .table td, .table thead th{
@@ -119,7 +119,7 @@
 				}
 				
 				.nav-link{
-                    color: rgba(255,255,255,.8) !important;
+                    color: rgba(255,255,255) !important;
 					font-weight: bold;
 				}
 
@@ -132,7 +132,7 @@
 				}
 				
 				.username{
-					color: rgba(255,255,255,.8);
+					color: rgba(255,255,255);
                     font-weight: bold;
 				}
 
