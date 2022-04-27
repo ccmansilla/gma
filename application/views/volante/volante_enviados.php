@@ -2,7 +2,7 @@
 <div class="col-sm-12">
 	<h1><?= $title ?></h1>
 <br>
-<a class="btn btn-success mb-2" href="<?= $new_url; ?>" role="button">Nuevo</a>
+<a class="btn btn-success mb-2" href="<?= $new_url ?>" role="button">Nuevo</a>
 <div class="table-orden">          
 <table class="table">
 	<thead class="thead-dark">
@@ -36,8 +36,8 @@
 				?>
 			</td>
 	        <td>
-				<a class="btn btn-primary" href="<?= base_url('jefatura/volante_edit/') . $id ?>" role="button">editar</a> 
-				<a class="btn btn-danger" href="<?=base_url('jefatura/volante_delete/') . $id ?>" role="button">borrar</a>
+				<a class="btn btn-primary" href="<?= $edit_url . $id ?>" role="button">editar</a> 
+				<a class="btn btn-danger" href="<?= $del_url . $id ?>" role="button">borrar</a>
 			</td>
 	    </tr>
 	<?php endforeach; ?>

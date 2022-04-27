@@ -12,11 +12,8 @@
 	</div>
 
 	<div class="form-group">
-	    <label class="control-label col-sm-2" for="numero">Numero/Año: </label>
-		<div class="form__flex">
-			<input type="number" class="form__number" id="numero" name="numero" value="" /> 
-			/ <input type="number" class="form__number" id="year" name="year" value="" /><br />
-		</div>
+	    <label class="control-label col-sm-2" for="numero">Numero: </label>
+		<input type="number" class="form-control" id="numero" name="numero" value="" /> 
 	</div>
 
 	<div class="form-group">

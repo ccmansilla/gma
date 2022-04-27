@@ -63,7 +63,11 @@ class Dependencia extends CI_Controller {
 		$data['title'] = 'Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Volantes';
+
+		#url
 		$data['new_url'] = base_url('dependencia/volante_create');
+		$data['edit_url'] = base_url('dependencia/volante_edit/');
+		$data['del_url'] = base_url('dependencia/volante_delete/');
 
 		#paginacion
 		$this->load->library('pagination');
@@ -116,7 +120,6 @@ class Dependencia extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('fecha', 'Fecha', 'required');
 		$this->form_validation->set_rules('numero', 'Numero', 'required');
-		$this->form_validation->set_rules('year', 'Año', 'required');
 		$this->form_validation->set_rules('asunto', 'Asunto', 'required');
 		$this->form_validation->set_rules('destino', 'Destino', 'required');
 		//$this->form_validation->set_rules('file', 'File', 'required');
