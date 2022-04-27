@@ -83,4 +83,13 @@ class Volante_model extends CI_Model {
             $this->db->where('id', $id);
             $this->db->delete('volantes');
     }
+
+	public function set_view(){
+        $id = xss_clean($this->input->post('id_volante'));
+		$data = array(
+            'visto' => 1
+        );
+        $this->db->where('id', $id);  
+        $this->db->update('volantes', $data);
+    }
 }
