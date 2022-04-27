@@ -231,6 +231,10 @@ class Jefatura extends CI_Controller {
 		#paginacion
 		$this->load->library('pagination');
 
+		#visto
+		$this->load->helper('form');
+		$data['action'] = 'jefatura/volante_view';
+
 		$config['base_url'] = base_url('jefatura/volante_recibidos/');
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
@@ -318,5 +322,11 @@ class Jefatura extends CI_Controller {
 			exit();
 		}
 		redirect('jefatura/volante_enviados');
+	}
+
+	public function volante_view($from = 0){
+		$this->load->helper('form');
+		$this->volante_model->set_view();
+		redirect("jefatura/volante_recibidos");
 	}
 }

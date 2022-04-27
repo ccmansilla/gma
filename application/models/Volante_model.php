@@ -36,6 +36,8 @@ class Volante_model extends CI_Model {
         $offset = xss_clean($offset);
         $where = xss_clean($where);
 
+        
+        $this->db->select('v.id, v.numero, v.year, v.fecha, u.name, v.asunto, v.enlace_archivo, v.visto');
         $this->db->from('volantes v');
 		$this->db->join('users u', "v.id_user_origen = u.id");
         $this->db->order_by('v.id', 'desc');
@@ -89,7 +91,7 @@ class Volante_model extends CI_Model {
 		$data = array(
             'visto' => 1
         );
-        $this->db->where('id', $id);  
+        $this->db->where('id', $id); 
         $this->db->update('volantes', $data);
     }
 }

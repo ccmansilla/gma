@@ -26,7 +26,7 @@ class Dependencia extends CI_Controller {
 		$id_user = $this->session->id_user;
 		$result = $this->orden_model->get_list_views_user($id_user, $limit, $from, $where);
 		$data['orders'] = $result['data'];
-		$data['title'] = 'Lista Ordenes';
+		$data['title'] = 'Ordenes';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Ordenes';
 
@@ -94,6 +94,10 @@ class Dependencia extends CI_Controller {
 
 		#paginacion
 		$this->load->library('pagination');
+
+		#visto
+		$this->load->helper('form');
+		$data['action'] = 'dependencia/volante_view';
 
 		$config['base_url'] = base_url('dependencia/volante_recibidos/');
 		$config['total_rows'] = $result['count'];
@@ -181,6 +185,12 @@ class Dependencia extends CI_Controller {
 			exit();
 		}
 		redirect('dependencia/volante_enviados');
+	}
+	
+	public function volante_view($from = 0){
+		$this->load->helper('form');
+		$this->volante_model->set_view();
+		redirect("dependencia/volante_recibidos");
 	}
 
 }

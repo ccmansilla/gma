@@ -9,7 +9,6 @@
 				</tr>
 			</thead>
 			<tbody>	
-				<?php echo form_open_multipart("dependencia/view/$type/$from");?>	
 				<?php foreach ($orders as $order): ?>
 					<tr>
 						<td>
@@ -18,18 +17,19 @@
 									<?php echo $order['type']."_".$order['number']."_".$order['year']; ?>
 								</a>
 							</label>
+							<?php echo form_open("dependencia/view/$type/$from");?>	
 								<?php
 									$id = $order['id'];
 									if ($order['id_order'] != NULL) {
-										echo "<input type='checkbox' name='id_order onchange='submit();' disabled checked>";
+										echo "<input type='checkbox' name='id_order' checked='cheked' disabled>";
 									} else {
 										echo "<input type='checkbox' name='id_order' onchange='submit();' value='$id'>";
 									}
 								?>
+							</form>
 						</td>
 					</tr>
-				<?php endforeach; ?>
-				</form>
+				<?php endforeach ?>
 			</tbody>
 		</table>
 		</div>
