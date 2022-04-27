@@ -17,14 +17,17 @@
 	</thead>
 	<tbody>
 	<?php foreach ($orders as $order): ?>
-		<?php $id = $order['id']; ?>
+		<?php 
+			$id = $order['id']; 
+			$numero = $order['number']."/".$order['year'];
+		?>
 	    <tr>
-			<td><?php echo $order['type']; ?></td>
-	        <td><?php echo $order['number']."/".$order['year']; ?></td>
-			<td><?php echo $order['about']; ?></td>
+			<td><?= $order['type']; ?></td>
+	        <td><?= $numero; ?></td>
+			<td><?= $order['about']; ?></td>
 	        <td><a href='<?php echo site_url('uploads/'.$order['file']); ?>' target="_blank" >abrir</a></td>
 			<td>
-				<a data-toggle="modal" onclick="modal(<?php echo $id; ?>)" href="#">   
+				<a data-toggle="modal" onclick="modal(<?= $id ?>, '<?= $numero ?>')" href="#">   
 					listar
 				</a>
 			</td>
@@ -47,19 +50,19 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Lista de Usuarios</h4>
+          <h4 class="modal-title" id="modal_title">Dependencias</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-			<pre  id="modal__content">
+			<pre  id="modal_content">
 
 			</pre>
         </div>
         
         <!-- Modal footer -->
-        <div class="modal-footer">
+        <div class="modal-footer justify-content-center">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
         </div>
         
@@ -70,7 +73,7 @@
 </div>
 </div>
 <script>
-	function modal(id){
+	function modal(id, numero){
 		fetch('http://localhost/gma/jefatura/order_views/'+id)
 		.then((response) => {
 			return response.json();
@@ -81,7 +84,8 @@
 				var user = users[i];
 				$lista += user['name'] + '<br>';
 			}
-			$("#modal__content").html($lista);
+			$("#modal_content").html($lista);
+			$("#modal_title").html('Dependencias con visto Orden '+numero);
 			//console.log(users);
 		});
 		

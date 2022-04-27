@@ -11,13 +11,14 @@ class Volante_model extends CI_Model {
         $offset = xss_clean($offset);
         $where = xss_clean($where);
 
-        $this->db->from('volantes');
-        $this->db->order_by('id', 'desc');
+        $this->db->from('volantes v');
+		$this->db->join('users u', "v.id_user_destino = u.id");
 		if ($where != "") {
-			$this->db->where($where);
+			//$this->db->where($where);
 		} else {
 			$this->db->where('id_user_origen', $id_user);
 		}
+        $this->db->order_by('v.id', 'desc');
         $result['data']  = $this->db->limit($limit, $offset)->get()->result_array();
 
         $this->db->from('volantes');
@@ -35,10 +36,11 @@ class Volante_model extends CI_Model {
         $offset = xss_clean($offset);
         $where = xss_clean($where);
 
-        $this->db->from('volantes');
-        $this->db->order_by('id', 'desc');
+        $this->db->from('volantes v');
+		$this->db->join('users u', "v.id_user_origen = u.id");
+        $this->db->order_by('v.id', 'desc');
 		if ($where != "") {
-			$this->db->where($where);
+			//$this->db->where($where);
 		} else {
 			$this->db->where('id_user_destino', $id_user);
 		}

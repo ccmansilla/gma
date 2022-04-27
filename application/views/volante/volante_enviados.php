@@ -22,7 +22,7 @@
 	    <tr>
 	        <td><?php echo $volante['numero']."/".$volante['year']; ?></td>
 			<td><?php echo fechaEsp($volante['fecha']); ?></td>
-			<td><?php echo $volante['id_user_destino']; ?></td>
+			<td><?php echo $volante['name']; ?></td>
 			<td><?php echo $volante['asunto']; ?></td>
 	        <td><a href='<?php echo site_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" >abrir</a></td>
 			<td>
