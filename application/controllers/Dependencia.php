@@ -60,7 +60,7 @@ class Dependencia extends CI_Controller {
 		$id_user = $this->session->id_user;
 		$result = $this->volante_model->get_list_enviados($id_user, $limit, $from);
 		$data['volantes'] = $result['data'];
-		$data['title'] = 'Lista Volantes Enviados';
+		$data['title'] = 'Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Volantes';
 		$data['new_url'] = base_url('dependencia/volante_create');
@@ -88,7 +88,7 @@ class Dependencia extends CI_Controller {
 		$id_user = $this->session->id_user;
 		$result = $this->volante_model->get_list_recibidos($id_user, $limit, $from);
 		$data['volantes'] = $result['data'];
-		$data['title'] = 'Lista Volantes Recibidos';
+		$data['title'] = 'Volantes Recibidos';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Volantes';
 
