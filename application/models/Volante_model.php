@@ -82,9 +82,9 @@ class Volante_model extends CI_Model {
 
     public function delete($id)
     {
-            $id = xss_clean($id);
-            $this->db->where('id', $id);
-            $this->db->delete('volantes');
+        $id = xss_clean($id);
+        $this->db->where('id', $id);
+        $this->db->delete('volantes');
     }
 
 	public function set_view(){
@@ -94,5 +94,18 @@ class Volante_model extends CI_Model {
         );
         $this->db->where('id', $id); 
         $this->db->update('volantes', $data);
+    }
+
+    public function next_number($user){
+        $year = date('y');
+        $this->db->select('max(numero)');
+        $this->db->from('volantes');
+        $this->db->where("id_user_origen = $user AND year = $year");
+        $result = $this->db->get()->result_array();
+        if ($result) {
+            return $result[0]['max(numero)'] + 1;
+        } else {
+            return 1;
+        }
     }
 }

@@ -14,7 +14,7 @@
 						<td>
 							<label for="visto">
 								<a href="#" onclick="cambiar_vista('<?php echo site_url('uploads/'.$order['file']);?>')" title="<?php echo $order['about'];?>">
-									<?php echo $order['type']."_".$order['number']."_".$order['year']; ?>
+									<?php echo $order['type']." ".$order['number']."/".$order['year']; ?>
 								</a>
 							</label>
 							<?php echo form_open("dependencia/view/$type/$from");?>	

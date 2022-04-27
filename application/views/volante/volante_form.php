@@ -8,12 +8,12 @@
 		
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="fecha">Fecha: </label>
-	    <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo (isset ($volante))? $volante['fecha'] : ''?>" /><br />
+	    <input type="date" class="form-control" id="fecha" name="fecha" value="<?= $fecha ?>" /><br />
 	</div>
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="numero">Numero: </label>
-		<input type="number" class="form-control" id="numero" name="numero" value="" /> 
+		<input type="number" class="form-control" id="numero" name="numero" value="<?= $numero ?>" /> 
 	</div>
 
 	<div class="form-group">

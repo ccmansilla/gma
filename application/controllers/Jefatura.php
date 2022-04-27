@@ -256,7 +256,6 @@ class Jefatura extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('fecha', 'Fecha', 'required');
 		$this->form_validation->set_rules('numero', 'Numero', 'required');
-		$this->form_validation->set_rules('year', 'Año', 'required');
 		$this->form_validation->set_rules('asunto', 'Asunto', 'required');
 		$this->form_validation->set_rules('destino', 'Destino', 'required');
 		//$this->form_validation->set_rules('file', 'File', 'required');
@@ -267,7 +266,8 @@ class Jefatura extends CI_Controller {
 			$data['menu'] = getMenu($this->session->role);
 			$data['menu_active'] = 'Volantes';
 			$data['action'] = "jefatura/volante_create";
-			
+			$data['fecha'] = date('Y-m-d');
+			$data['numero'] = $this->volante_model->next_number($this->session->id_user);
 			$data['destinos'] = simple_to_associative($this->user_model->get_list_basic($this->session->id_user));
 
 			$this->load->view('templates/header', $data);

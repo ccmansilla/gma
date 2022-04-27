@@ -130,6 +130,8 @@ class Dependencia extends CI_Controller {
 			$data['menu'] = getMenu($this->session->role);
 			$data['menu_active'] = 'Volantes';
 			$data['action'] = "dependencia/volante_create";
+			$data['fecha'] = date('Y-m-d');
+			$data['numero'] = $this->volante_model->next_number($this->session->id_user);
 			$data['destinos'] = simple_to_associative($this->user_model->get_list_basic($this->session->id_user));
 
 			$this->load->view('templates/header', $data);

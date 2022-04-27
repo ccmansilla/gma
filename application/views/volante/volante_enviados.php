@@ -24,7 +24,7 @@
 			<td><?php echo fechaEsp($volante['fecha']); ?></td>
 			<td><?php echo $volante['name']; ?></td>
 			<td><?php echo $volante['asunto']; ?></td>
-	        <td><a href='<?php echo site_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" >abrir</a></td>
+	        <td><a href='<?php echo base_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" >abrir</a></td>
 			<td>
 				<?php 
 					$visto = $volante['visto'];
