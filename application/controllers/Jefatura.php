@@ -199,7 +199,11 @@ class Jefatura extends CI_Controller {
 		$data['title'] = 'Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Volantes';
-		$data['new_url'] = basename('jefatura/volante_create');
+
+		#url
+		$data['new_url'] = base_url('jefatura/volante_create');
+		$data['edit_url'] = base_url('jefatura/volante_edit/');
+		$data['del_url'] = base_url('jefatura/volante_delete/');
 
 		#paginacion
 		$this->load->library('pagination');
