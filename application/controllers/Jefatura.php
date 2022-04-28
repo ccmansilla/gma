@@ -60,7 +60,6 @@ class Jefatura extends CI_Controller {
 		$this->form_validation->set_rules('fecha', 'Fecha', 'required');
 		$this->form_validation->set_rules('numero', 'Numero', 'required');
 		$this->form_validation->set_rules('tema', 'Tema', 'required');
-		//$this->form_validation->set_rules('file', 'File', 'required');
 
 		if ($this->form_validation->run() === FALSE)
 		{
@@ -92,7 +91,7 @@ class Jefatura extends CI_Controller {
 
 			$this->load->library('upload', $config);
 
-			if ( ! $this->upload->do_upload('file'))
+			if (!$this->upload->do_upload('file'))
 			{
 				$error = array('error' => $this->upload->display_errors());
 				$this->load->view('jefatura/orden_form', $error);
@@ -142,27 +141,43 @@ class Jefatura extends CI_Controller {
 			$nombre = $tipo.'_'.$year.'_'.$numero;
 			$archivo = $nombre.'.pdf';
 			
-			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf';
-			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
-			$config['file_name'] = $nombre;
-
-			$this->load->library('upload', $config);
-			
 			$archivo_anterior = $this->orden_model->get_file($id);
-			if(!unlink('./uploads/'.$archivo_anterior)){	
-				echo "No se pudo actualizar el archivo";
-				exit();
-			}
 
-			if ( ! $this->upload->do_upload('file'))
-			{
-				$error = array('error' => $this->upload->display_errors());
-				$this->load->view('orden_form', $error);
-			}
-			else
-			{
-				$upload_data = $this->upload->data();
+			$file = $this->input->post('file');
+
+			if(isset($file)){
+				$config['upload_path']          = './uploads/';
+				$config['allowed_types']        = 'pdf';
+				$config['max_size']             = 10240;//archivo tamaño maximo 10mb
+				$config['file_name'] = $nombre;
+
+				$this->load->library('upload', $config);
+				
+				if(!unlink('./uploads/'.$archivo_anterior))
+				{	
+					echo "No se pudo actualizar el archivo ".$archivo_anterior;
+					exit();
+				}
+
+				if (!$this->upload->do_upload('file'))
+				{
+					$error = array('error' => $this->upload->display_errors());
+					$this->load->view('orden_form', $error);
+				}
+				else
+				{
+					$upload_data = $this->upload->data();
+					$data = array('date' => $fecha,'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo);
+					$this->orden_model->update($id,$data);
+					redirect('jefatura/');
+				}
+			} else {
+				$enlace_archivo_anterior = './uploads/'.$archivo_anterior;
+				$enlace_archivo = './uploads/'.$archivo;
+				if(!rename($enlace_archivo_anterior, $enlace_archivo)){
+					echo "Error no se pudo renombrar archivo ".$enlace_archivo_anterior." por ".$enlace_archivo;
+					exit();
+				}
 				$data = array('date' => $fecha,'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo);
 				$this->orden_model->update($id,$data);
 				redirect('jefatura/');
