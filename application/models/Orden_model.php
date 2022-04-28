@@ -72,7 +72,13 @@ class Orden_model extends CI_Model {
     public function delete($id)
     {
             $id = xss_clean($id);
+
+			#borrar la orden
             $this->db->where('id', $id);
             $this->db->delete('orders');
+
+			#borrar los vistos
+			$this->db->where('id_order', $id);
+            $this->db->delete('views');
     }
 }

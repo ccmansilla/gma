@@ -23,7 +23,7 @@
                 }
 
                 .nav__dropdown__bg {
-                    background-color: #F6F2D4;
+                    background-color: #F9ED93; /*#F6F2D4;*/
                 }
 
                 .nav__dropdown__color {
@@ -66,7 +66,7 @@
                 }
 
                 #formulario{
-                    background-color: #F6F2D4;
+                    background-color: #F9ED93; /*#F6F2D4;*/
                     opacity: .85;
 					margin: 20px;
                     padding: 20px;
