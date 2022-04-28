@@ -22,7 +22,11 @@
 				<td><?php echo fechaEsp($volante['fecha']); ?></td>
 				<td><?php echo $volante['name']; ?></td>
 				<td><?php echo $volante['asunto']; ?></td>
-				<td><a href='<?php echo site_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" >abrir</a></td>
+				<td>
+					<a class="btn btn-light" href='<?php echo site_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" title="abrir archivo">
+						<img src="<?= base_url('assets/images/file_open.png') ?>" width="20px">
+					</a>
+				</td>
 				<td>
 					<?php echo form_open($action);?>
 						<?php 

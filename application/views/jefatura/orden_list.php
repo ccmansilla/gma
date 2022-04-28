@@ -2,17 +2,18 @@
 <div class="col-sm-12">
 <h1><?= $title; ?></h1>
 <br>
-<a class="btn btn-success mb-2" href="<?=base_url()?>jefatura/order_create" role="button">Nuevo</a>
+<a class="btn btn-light mb-2" href="<?=base_url()?>jefatura/order_create" role="button" title="nueva orden">
+	<img src="<?= base_url('assets/images/add.png') ?>" width="20px">Nueva
+</a>
 <div class="table-orden">          
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-		<th style="width: 5%;">Tipo</th>
-		<th style="width: 9%;">Número</th>
+		<th style="width: 10%;">Número</th>
 		<th style="width: 50%;">Tema</th>
-		<th style="width: 9%;">Archivo</th>
-		<th style="width: 9%;">Vistos</th>
-		<th style="width: 18%;">Accion</th>
+		<th style="width: 10%;">Archivo</th>
+		<th style="width: 10%;">Vistos</th>
+		<th style="width: 20%;">Accion</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,18 +23,25 @@
 			$numero = $order['number']."/".$order['year'];
 		?>
 	    <tr>
-			<td><?= $order['type']; ?></td>
 	        <td><?= $numero; ?></td>
 			<td><?= $order['about']; ?></td>
-	        <td><a href='<?php echo site_url('uploads/'.$order['file']); ?>' target="_blank" >abrir</a></td>
+	        <td>
+				<a class="btn btn-light" href='<?php echo site_url('uploads/'.$order['file']); ?>' target="_blank"  title="abrir archivo">
+					<img src="<?= base_url('assets/images/file_open.png') ?>" width="20px">
+				</a>
+			</td>
 			<td>
-				<a data-toggle="modal" onclick="modal(<?= $id ?>, '<?= $numero ?>')" href="#">   
-					listar
+				<a class="btn btn-light" data-toggle="modal" onclick="modal(<?= $id ?>, '<?= $numero ?>')" href="#"  title="listar vistos">   
+					<img src="<?= base_url('assets/images/fact_check.png') ?>" width="20px">
 				</a>
 			</td>
 	        <td class="text-center">
-				<a class="btn btn-primary" href="<?= base_url('jefatura/order_edit/') . $id ?>" role="button">editar</a> 
-				<a class="btn btn-danger" href="<?=base_url('jefatura/order_delete/') . $id ?>" role="button">borrar</a>
+				<a class="btn btn-light" href="<?= base_url('jefatura/order_edit/') . $id ?>" role="button"  title="editar orden">
+					<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">Editar
+				</a> 
+				<a class="btn btn-light" href="<?=base_url('jefatura/order_delete/') . $id ?>" role="button"  title="borrar orden">
+					<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">Borrar
+				</a>
 			</td>
 	    </tr>
 	<?php endforeach; ?>

@@ -26,7 +26,14 @@ class Dependencia extends CI_Controller {
 		$id_user = $this->session->id_user;
 		$result = $this->orden_model->get_list_views_user($id_user, $limit, $from, $where);
 		$data['orders'] = $result['data'];
-		$data['title'] = 'Ordenes';
+		$data['title'] = 'Ordenes del Día';
+		if($type == 'og'){
+			$data['title'] = 'Ordenes de Guarnicion';
+		} else {
+			if($type == 'or'){
+				$data['title'] = 'Ordenes Reservada';
+			}
+		}
 		$data['menu'] = getMenu($this->session->role);
 		$data['menu_active'] = 'Ordenes';
 
