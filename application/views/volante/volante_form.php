@@ -34,8 +34,8 @@
 	<br />
 
     <div class="col-sm-offset-2 text-center pt-5">
-    	<input type="submit" class="btn btn-success" name="submit" value="Guardar" />
-        <button class="btn btn-danger"  onclick="window.history.back();" >Cancelar</button>
+    	<input type="submit" class="btn btn-light" name="submit" value="Guardar" />
+        <button class="btn btn-light"  onclick="window.history.back();" >Cancelar</button>
     </div>
 </form>
 </div>

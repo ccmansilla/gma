@@ -71,7 +71,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
         </div>
         
       </div>
