@@ -140,6 +140,7 @@ class Dependencia extends CI_Controller {
 			$data['fecha'] = date('Y-m-d');
 			$data['numero'] = $this->volante_model->next_number($this->session->id_user);
 			$data['destinos'] = simple_to_associative($this->user_model->get_list_basic($this->session->id_user));
+			$data['destino'] = '';
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('volante/volante_form', $data);
@@ -183,6 +184,87 @@ class Dependencia extends CI_Controller {
 				redirect('dependencia/volante_enviados');
 			}
 			
+		}
+	}
+
+	
+	public function volante_edit($id){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('fecha', 'Fecha', 'required');
+		$this->form_validation->set_rules('numero', 'Numero', 'required');
+		$this->form_validation->set_rules('asunto', 'Asunto', 'required');
+		$this->form_validation->set_rules('destino', 'Destino', 'required');
+
+		if ($this->form_validation->run() === FALSE){
+			$data['title'] = 'Editar Volante Enviado';
+			$data['menu'] = getMenu($this->session->role);
+			$data['menu_active'] = 'Volantes';
+			$data['action'] = "dependencia/volante_edit/$id";
+			$data['destinos'] = simple_to_associative($this->user_model->get_list_basic($this->session->id_user));
+			#buscar los datos del volante
+			$volante = $this->volante_model->get($id);
+			$data['fecha'] = $volante['fecha'];
+			$data['numero'] = $volante['numero'];
+			$data['destino'] = $volante['id_user_destino'];
+			$data['asunto'] = $volante['asunto'];
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('volante/volante_form', $data);
+			$this->load->view('templates/footer');
+
+		} else {
+
+			$fecha = $this->input->post('fecha');
+			$numero = $this->input->post('numero');
+			$year = date("y", strtotime($fecha));
+			$asunto = $this->input->post('asunto');
+
+			$id_user_origen = $this->session->id_user;
+			$id_user_destino = $this->input->post('destino');
+			
+			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero;
+			$archivo = $nombre.'.pdf';
+			$archivo_anterior = $this->volante_model->get_file($id);
+
+			if (!empty($_FILES['file']['name'])) {
+				$config['upload_path']          = './uploads/';
+				$config['allowed_types']        = 'pdf';
+				$config['max_size']             = 10240;//archivo tamaño maximo 10mb
+				$config['file_name'] = $nombre;
+
+				if(!unlink('./uploads/'.$archivo_anterior)){	
+					echo "No se pudo actualizar el archivo ".$archivo_anterior;
+					exit();
+				}
+
+				$this->load->library('upload', $config);
+
+				if (!$this->upload->do_upload('file')){
+					$error = array('error' => $this->upload->display_errors());
+					$this->load->view('dependencia/volante_form', $error);
+				}
+				else
+				{
+					$upload_data = $this->upload->data();
+					$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
+									'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
+									'id_user_destino' => $id_user_destino);
+					$this->volante_model->update($id, $data);
+					redirect('dependencia/volante_enviados');
+				}
+			} else {
+				$enlace_archivo_anterior = './uploads/'.$archivo_anterior;
+				$enlace_archivo = './uploads/'.$archivo;
+				if(!rename($enlace_archivo_anterior, $enlace_archivo)){
+					echo "Error no se pudo renombrar archivo ".$enlace_archivo_anterior." por ".$enlace_archivo;
+					exit();
+				}
+				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
+									'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
+									'id_user_destino' => $id_user_destino);
+				$this->volante_model->update($id, $data);
+				redirect('dependencia/volante_enviados');
+			}
 		}
 	}
 

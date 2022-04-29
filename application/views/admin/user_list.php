@@ -1,6 +1,7 @@
 <h2><?php echo $title; ?></h2>
 
-<a class="btn btn-success" href="<?=base_url()?>admin/user_create" role="button">Nuevo</a>
+<a class="btn btn-light" href="<?=base_url()?>admin/user_create" role="button">
+<img src="<?= base_url('assets/images/add.png') ?>" width="20px">Nuevo</a>
 
 <div class="table-user">          
 <table class="table">
@@ -18,7 +19,14 @@
 		        <td><?php echo $user['name']; ?></td>
 		        <td><?php echo $user['role']; ?></td>
 		        <td><?php echo $user['nick']; ?></td>
-		        <td><a class="btn btn-primary" href="<?= base_url('admin/user_edit/') . $user['id'] ?>" role="button" >editar</a> <a class="btn btn-danger" href="<?= base_url('admin/user_delete/') . $user['id'] ?>" role="button" >borrar</a></td>
+		        <td>
+					<a class="btn btn-light" href="<?= base_url('admin/user_edit/') . $user['id'] ?>" role="button" >
+						<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">Editar
+					</a> 
+					<a class="btn btn-light" href="<?= base_url('admin/user_delete/') . $user['id'] ?>" role="button" >
+						<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">Borrar
+					</a>
+				</td>
 		    </tr>
 	<?php endforeach; ?>
 	</tbody>
