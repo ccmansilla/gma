@@ -31,7 +31,7 @@
 				</a>
 			</td>
 			<td>
-				<a class="btn btn-light" data-toggle="modal" onclick="modal(<?= $id ?>, '<?= $numero ?>')" href="#"  title="listar vistos">   
+				<a class="btn btn-light" data-toggle="modal" onclick="modalVisto(<?= $id ?>, '<?= $numero ?>')" href="#"  title="listar vistos">   
 					<img src="<?= base_url('assets/images/fact_check.png') ?>" width="20px">
 				</a>
 			</td>
@@ -39,7 +39,7 @@
 				<a class="btn btn-light" href="<?= base_url('jefatura/order_edit/') . $id ?>" role="button"  title="editar orden">
 					<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">Editar
 				</a> 
-				<a class="btn btn-light" href="<?=base_url('jefatura/order_delete/') . $id ?>" role="button"  title="borrar orden">
+				<a class="btn btn-light" onclick="modalBorrar(<?= $id ?>, '<?= $numero ?>')" role="button"  title="borrar orden">
 					<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">Borrar
 				</a>
 			</td>
@@ -52,7 +52,7 @@
 	<?= $pagination ?>
 </div>
   <!-- The Modal -->
-  <div class="modal fade" id="myModal">
+  <div class="modal fade" id="modal__visto">
     <div class="modal-dialog">
       <div class="modal-content">
       
@@ -78,11 +78,31 @@
     </div>
   </div>
 
+	<!-- Modal Borrado -->
+	<div class="modal fade" id="modal__borrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div id="modal__body">
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+			<a href="#delete" id="confirma"><button type="button" class="btn btn-primary">Si</button></a>
+		</div>
+		</div>
+	</div>
+	</div>
+
 </div>
 </div>
 <script>
-	function modal(id, numero){
-		fetch('http://localhost/gma/jefatura/order_views/'+id)
+	function modalVisto(id, numero){
+		fetch('<?= base_url('jefatura/order_views/') ?>'+id)
 		.then((response) => {
 			return response.json();
 		})
@@ -96,7 +116,12 @@
 			$("#modal_title").html('Dependencias con visto Orden '+numero);
 			//console.log(users);
 		});
-		
-		$("#myModal").modal()
+		$("#modal__visto").modal();
+	}
+
+	function modalBorrar(id, numero){
+		$("#modal__body").html("<br>¿Esta seguro de borrar la orden numero "+numero+" ?  <br><br>");
+		$("#confirma").attr("href", "<?=base_url('jefatura/order_delete/') ?>"+id);
+		$("#modal__borrar").modal();
 	}
 </script>
