@@ -19,9 +19,12 @@
 	</thead>
 	<tbody>
 	<?php foreach ($volantes as $volante): ?>
-		<?php $id = $volante['id']; ?>
+		<?php 
+			$id = $volante['id'];
+			$numero = $volante['numero']."/".$volante['year']; 
+		?>
 	    <tr>
-	        <td><?php echo $volante['numero']."/".$volante['year']; ?></td>
+	        <td><?php echo $numero; ?></td>
 			<td><?php echo $volante['name']; ?></td>
 			<td><?php echo $volante['asunto']; ?></td>
 	        <td>
@@ -43,7 +46,7 @@
 				<a class="btn btn-light" href="<?= $edit_url . $id ?>" role="button" title="editar volante">
 					<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">Editar
 				</a> 
-				<a class="btn btn-light" href="<?= $del_url . $id ?>" role="button" title="borrar volante">
+				<a class="btn btn-light" onclick="modalBorrar(<?= $id ?>, '<?= $numero ?>')"  role="button" title="borrar volante">
 					<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">Borrar
 				</a>
 			</td>
@@ -55,6 +58,35 @@
 <div class="pagination">
 	<?= $pagination ?>
 </div>
+<!-- Modal Borrado -->
+<div class="modal fade" id="modal__borrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div id="modal__body">
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+			<a href="#delete" id="confirma"><button type="button" class="btn btn-light">Si</button></a>
+		</div>
+		</div>
+	</div>
+	</div>
+
+</div>
+</div>
+<script>
+	function modalBorrar(id, numero){
+		$("#modal__body").html("<br>&nbsp;¿Esta seguro de borrar el volante numero "+numero+"?  <br><br>");
+		$("#confirma").attr("href", "<?= $del_url ?>"+id);
+		$("#modal__borrar").modal();
+	}
+</script>
 </div>
 </div>
 
