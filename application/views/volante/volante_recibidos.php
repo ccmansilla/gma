@@ -6,12 +6,11 @@
 <table class="table table-bordered">
 	<thead class="thead-dark">
 		<tr>
-		<th style="width: 6%;">Número</th>
-		<th style="width: 9%;">Fecha</th>
-		<th style="width: 17%;">Origen</th>
+		<th style="width: 10%;">Número</th>
+		<th style="width: 20%;">Origen</th>
 		<th style="width: 50%;">Asunto</th>
-		<th style="width: 9%;">Archivo</th>
-		<th style="width: 9%;">Visto</th>
+		<th style="width: 10%;">Archivo</th>
+		<th style="width: 10%;">Visto</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,7 +18,6 @@
 			<?php $id = $volante['id']; ?>
 			<tr>
 				<td><?php echo $volante['numero']."/".$volante['year']; ?></td>
-				<td><?php echo fechaEsp($volante['fecha']); ?></td>
 				<td><?php echo $volante['name']; ?></td>
 				<td><?php echo $volante['asunto']; ?></td>
 				<td>

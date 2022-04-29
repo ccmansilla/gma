@@ -377,7 +377,7 @@ class Jefatura extends CI_Controller {
 					$upload_data = $this->upload->data();
 					$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
 									'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
-									'id_user_destino' => $id_user_destino);
+									'id_user_destino' => $id_user_destino, 'visto' => 0);
 					$this->volante_model->update($id, $data);
 					redirect('jefatura/volante_enviados');
 				}
@@ -390,7 +390,7 @@ class Jefatura extends CI_Controller {
 				}
 				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
 									'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
-									'id_user_destino' => $id_user_destino);
+									'id_user_destino' => $id_user_destino, 'visto' => 0);
 				$this->volante_model->update($id, $data);
 				redirect('jefatura/volante_enviados');
 			}
