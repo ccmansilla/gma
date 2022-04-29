@@ -63,10 +63,15 @@ class Orden_model extends CI_Model {
     }
 
     public function update($id, $data)
-    {
+    {	
+		#edita una orden
         $id = xss_clean($id);
         $this->db->where('id', $id);  
         $this->db->update('orders', $data);
+
+		#borrar los vistos
+		$this->db->where('id_order', $id);
+		$this->db->delete('views');
     }
 
     public function delete($id)
