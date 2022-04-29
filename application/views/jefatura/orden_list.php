@@ -91,8 +91,8 @@
 		<div id="modal__body">
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-			<a href="#delete" id="confirma"><button type="button" class="btn btn-primary">Si</button></a>
+			<button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+			<a href="#delete" id="confirma"><button type="button" class="btn btn-light">Si</button></a>
 		</div>
 		</div>
 	</div>
@@ -120,7 +120,7 @@
 	}
 
 	function modalBorrar(id, numero){
-		$("#modal__body").html("<br>¿Esta seguro de borrar la orden numero "+numero+" ?  <br><br>");
+		$("#modal__body").html("<br>&nbsp;¿Esta seguro de borrar la orden numero "+numero+"?  <br><br>");
 		$("#confirma").attr("href", "<?=base_url('jefatura/order_delete/') ?>"+id);
 		$("#modal__borrar").modal();
 	}
