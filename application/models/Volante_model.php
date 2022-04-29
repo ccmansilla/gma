@@ -68,6 +68,12 @@ class Volante_model extends CI_Model {
 		return $result[0];
     }
 
+	public function get_file($id)
+    {
+        $volante = $this->get($id);
+        return $volante['enlace_archivo'];
+    }
+
     public function insert($data)
     {
         return $this->db->insert('volantes', $data);

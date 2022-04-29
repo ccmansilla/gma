@@ -18,13 +18,12 @@
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="destino">Destino: </label>
-		<?php echo form_dropdown('destino', $destinos, '', "class='form-control'"); ?>
+		<?php echo form_dropdown('destino', $destinos, $destino, "class='form-control'"); ?>
 	</div>
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="tema">Asunto: </label>
-	    <textarea class="form-control" id="asunto" name="asunto">
-			<?php echo (isset ($volante))? $volante['asunto'] : '' ?>
+	    <textarea class="form-control" id="asunto" name="asunto"><?=isset($asunto)? $asunto : ''?>
 		</textarea><br />
 	</div>
 	
