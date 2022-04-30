@@ -66,7 +66,7 @@
                 }
 
                 #formulario{
-                    background-color: #F9ED93; /*#F6F2D4;*/
+                    background-color: #C2CEDB;/*#F9ED93;*/
                     opacity: .85;
 					margin: 20px;
                     padding: 20px;
@@ -74,7 +74,7 @@
                     border: 1px groove #000 !important;
                     -webkit-box-shadow:  0px 5px 5px 0px #000;
                             box-shadow:  0px 5px 5px 0px #000;
-                    color: gray;
+                    color: black;
                 }
 
                 fieldset {
@@ -168,7 +168,7 @@
 				}
 
                 .btn-light {
-                    background-color: #b1c4a7d9;
+                    background-color: #EBF8A4;
                 }
 
                 .modal-header{

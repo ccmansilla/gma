@@ -1,6 +1,34 @@
 <div class="row">
 <div class="col-sm-12">
-	<h1><?= $title ?></h1>
+	<h1 class="text-center"><?= $title ?></h1>
+<br>
+<div class="row justify-content-center">
+	<div class="col-12 col-md-10 col-lg-8">
+		<form class="card card-sm" style="background-color:#C2CEDB;">
+			<div class="card-body row no-gutters align-items-end">
+				<div class="col-2">
+					<label for="numero">Número:</label>
+					<input class="form-control form-control-borderless" type="number" name="numero" min="1" max="999" value="<?= $fnumero?>">
+				</div>
+				<div class="col-2">
+					<label for="year">Año:</label>
+					<input class="form-control form-control-borderless" type="number" name="year"  min="1" max="99" value="<?= $fyear ?>">
+				</div>
+				<!--end of col-->
+				<div class="col-6">
+					<label for="year">Asunto:</label>
+					<input class="form-control form-control-borderless" type="search" name="asunto" value="<?= $fasunto ?>" placeholder="Ingrese palabras">
+				</div>
+				<!--end of col-->
+				<div class="col-2">
+					<button class="btn btn-light ml-2" type="submit"><img src="<?= base_url('assets/images/search.png') ?>" width="20px">Buscar</button>
+				</div>
+				<!--end of col-->
+			</div>
+		</form>
+	</div>
+	<!--end of col-->
+</div>
 <br>
 <div class="table-orden">          
 <table class="table table-bordered">

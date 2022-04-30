@@ -202,7 +202,33 @@ class Jefatura extends CI_Controller {
 		$limit = 10;
 		$data['from'] = $from;
 		$id_user = $this->session->id_user;
-		$result = $this->volante_model->get_list_enviados($id_user, $limit, $from);
+		#filtros
+		$fnumero = $this->input->get('numero');
+		$fyear = $this->input->get('year');
+		$fasunto = $this->input->get('asunto');
+
+		$where = '';
+		if($fnumero != ''){
+			$where = " numero = $fnumero";
+		}
+		if($fyear != ''){
+			if($where != ''){
+				$where .= " AND";
+			}
+			$where .= " year = $fyear";
+		}
+		if($fasunto != ''){
+			if($where != ''){
+				$where .= " AND";
+			}
+			$where .= " asunto LIKE '%$fasunto%'";
+		}
+
+		$data['fnumero'] = $fnumero;
+		$data['fyear'] = $fyear;
+		$data['fasunto'] = $fasunto;
+
+		$result = $this->volante_model->get_list_enviados($id_user, $limit, $from, $where);
 		$data['volantes'] = $result['data'];
 		$data['title'] = 'Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
@@ -234,7 +260,33 @@ class Jefatura extends CI_Controller {
 		$limit = 10;
 		$data['from'] = $from;
 		$id_user = $this->session->id_user;
-		$result = $this->volante_model->get_list_recibidos($id_user, $limit, $from);
+		#filtros
+		$fnumero = $this->input->get('numero');
+		$fyear = $this->input->get('year');
+		$fasunto = $this->input->get('asunto');
+
+		$where = '';
+		if($fnumero != ''){
+			$where = " numero = $fnumero";
+		}
+		if($fyear != ''){
+			if($where != ''){
+				$where .= " AND";
+			}
+			$where .= " year = $fyear";
+		}
+		if($fasunto != ''){
+			if($where != ''){
+				$where .= " AND";
+			}
+			$where .= " asunto LIKE '%$fasunto%'";
+		}
+
+		$data['fnumero'] = $fnumero;
+		$data['fyear'] = $fyear;
+		$data['fasunto'] = $fasunto;
+
+		$result = $this->volante_model->get_list_recibidos($id_user, $limit, $from, $where);
 		$data['volantes'] = $result['data'];
 		$data['title'] = 'Volantes Recibidos';
 		$data['menu'] = getMenu($this->session->role);
