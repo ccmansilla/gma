@@ -21,6 +21,25 @@ class Jefatura extends CI_Controller {
 		$data['type'] = $type;
 		$data['from'] = $from;
 		$where = "type = '$type'";
+		#filtros
+		$fnumero = $this->input->get('numero');
+		$fyear = $this->input->get('year');
+		$fasunto = $this->input->get('asunto');
+
+		if($fnumero != ''){
+			$where .= " AND number = $fnumero";
+		}
+		if($fyear != ''){
+			$where .= " AND year = $fyear";
+		}
+		if($fasunto != ''){
+			$where .= " AND about LIKE '%$fasunto%'";
+		}
+
+		$data['fnumero'] = $fnumero;
+		$data['fyear'] = $fyear;
+		$data['fasunto'] = $fasunto;
+
 		$result = $this->orden_model->get_list($limit, $from, $where);
 		$data['orders'] = $result['data'];		
 		$data['title'] = 'Ordenes del Día';
@@ -37,12 +56,14 @@ class Jefatura extends CI_Controller {
 		#paginacion
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url('jefatura/index/');
+		$config['base_url'] = base_url("jefatura/index/$type");
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
 
-		$this->pagination->initialize($config);
+		#pega la busqueda
+		$config['reuse_query_string'] = TRUE;
 
+		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links(); 
 
 		$this->load->view('templates/header', $data);
@@ -245,6 +266,9 @@ class Jefatura extends CI_Controller {
 		$config['base_url'] = base_url('jefatura/volante_enviados/');
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
+		
+		#pega la busqueda
+		$config['reuse_query_string'] = TRUE;
 
 		$this->pagination->initialize($config);
 
@@ -302,6 +326,9 @@ class Jefatura extends CI_Controller {
 		$config['base_url'] = base_url('jefatura/volante_recibidos/');
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
+		
+		#pega la busqueda
+		$config['reuse_query_string'] = TRUE;
 
 		$this->pagination->initialize($config);
 

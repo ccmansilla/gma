@@ -22,6 +22,25 @@ class Dependencia extends CI_Controller {
 		$data['from'] = $from;
 		$data['action'] = base_url(). 'dependencia/index/';
 		$where = "type = '$type'";
+		#filtros
+		$fnumero = $this->input->get('numero');
+		$fyear = $this->input->get('year');
+		$fasunto = $this->input->get('asunto');
+
+		if($fnumero != ''){
+			$where .= " AND number = $fnumero";
+		}
+		if($fyear != ''){
+			$where .= " AND year = $fyear";
+		}
+		if($fasunto != ''){
+			$where .= " AND about LIKE '%$fasunto%'";
+		}
+
+		$data['fnumero'] = $fnumero;
+		$data['fyear'] = $fyear;
+		$data['fasunto'] = $fasunto;
+
 		$limit = 10;
 		$id_user = $this->session->id_user;
 		$result = $this->orden_model->get_list_views_user($id_user, $limit, $from, $where);
@@ -43,6 +62,8 @@ class Dependencia extends CI_Controller {
 		$config['base_url'] = base_url() . "dependencia/index/$type/";
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
+		#pega la busqueda
+		$config['reuse_query_string'] = TRUE;
 
 		$this->pagination->initialize($config);
 
@@ -108,6 +129,8 @@ class Dependencia extends CI_Controller {
 		$config['base_url'] = base_url('jefatura/volante_enviados/');
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
+		#pega la busqueda
+		$config['reuse_query_string'] = TRUE;
 
 		$this->pagination->initialize($config);
 
@@ -165,6 +188,8 @@ class Dependencia extends CI_Controller {
 		$config['base_url'] = base_url('dependencia/volante_recibidos/');
 		$config['total_rows'] = $result['count'];
 		$config['per_page'] = $limit;
+		#pega la busqueda
+		$config['reuse_query_string'] = TRUE;
 
 		$this->pagination->initialize($config);
 
