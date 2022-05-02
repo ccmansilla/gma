@@ -423,14 +423,26 @@ class Jefatura extends CI_Controller {
 			$id_user_destino = $this->input->post('destino');
 			
 			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero;
-			$archivo = $nombre.'.pdf';
 			
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf';
+			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
-			$config['file_name'] = $nombre;
+			$config['file_name'] = 'adj_'.$nombre;
+
+			$adjunto = '';
+			$archivo = '';
 
 			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload('adjunto')){
+				$error = array('error' => $this->upload->display_errors());
+				$this->load->view('jefatura/volante_form', $error);
+			} else {
+				$adjunto = $this->upload->data('file_name');
+			}
+
+			$config['file_name'] = $nombre;
+			$this->upload->initialize($config);
 
 			if ( ! $this->upload->do_upload('file')){
 				$error = array('error' => $this->upload->display_errors());
@@ -438,10 +450,10 @@ class Jefatura extends CI_Controller {
 			}
 			else
 			{
-				$upload_data = $this->upload->data();
+				$archivo = $this->upload->data('file_name');
 				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
-								'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
-								'id_user_destino' => $id_user_destino);
+								'enlace_archivo' => $archivo, 'enlace_adjunto' => $adjunto, 
+								'id_user_origen' => $id_user_origen, 'id_user_destino' => $id_user_destino);
 				$this->volante_model->insert($data);
 				redirect('jefatura/volante_enviados');
 			}

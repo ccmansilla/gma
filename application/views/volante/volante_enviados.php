@@ -38,9 +38,10 @@
 	<thead class="thead-dark">
 		<tr>
 		<th style="width: 10%;">Número</th>
-		<th style="width: 20%;">Destino</th>
-		<th style="width: 35%;">Asunto</th>
+		<th style="width: 15%;">Destino</th>
+		<th style="width: 30%;">Asunto</th>
 		<th style="width: 10%;">Archivo</th>
+		<th style="width: 10%;">Adjunto</th>
 		<th style="width: 10%;">Visto</th>
 		<th style="width: 15%;"></th>
 		</tr>
@@ -59,6 +60,13 @@
 				<a class="btn btn-light" href='<?php echo base_url('uploads/'.$volante['enlace_archivo']); ?>' target="_blank" title="abrir archivo">
 					<img src="<?= base_url('assets/images/file_open.png') ?>" width="20px">
 				</a>
+			</td>
+			<td>
+				<?php if($volante['enlace_adjunto'] != NUll) { ?>
+					<a class="btn btn-light" href='<?php echo base_url('uploads/'.$volante['enlace_adjunto']); ?>' target="_blank" title="abrir archivo">
+						<img src="<?= base_url('assets/images/file_open.png') ?>" width="20px">
+					</a>
+				<?php } ?>
 			</td>
 			<td>
 				<?php 

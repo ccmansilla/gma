@@ -32,12 +32,12 @@
 	
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="nombre">Archivo: </label>
-		<input type="file" name="file" size="20" />
+		<input type="file" class="form-control-file" name="file" size="20" />
 	<br />
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="attached">Adjunto: </label>
-		<input type="file" name="attached" size="20" />
+		<input type="file" class="form-control-file" name="attached" size="20" />
 	</div>
 
     <div class="col-sm-offset-2 text-center pt-5">
