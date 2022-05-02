@@ -168,7 +168,7 @@
 				}
 
                 .btn-light {
-                    background-color: #EBF8A4;
+                    background-color: #AECC0D;
                 }
 
                 .modal-header{

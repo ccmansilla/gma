@@ -102,15 +102,28 @@ class Jefatura extends CI_Controller {
 			$tema = $this->input->post('tema');
 			$year = date("y", strtotime($fecha)); 
 			$nombre = $tipo.'_'.$year.'_'.$numero;
-			$archivo = $nombre.'.pdf';
 			
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf';
+			$config['allowed_types']        = 'pdf|docx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
-			$config['file_name'] = $nombre;
+			$config['file_name'] = 'adj_'.$nombre;
+			
+			$adjunto = '';
+			$archivo = '';
 
 			$this->load->library('upload', $config);
+			# primero carga el archivo adjunto
+			if (!$this->upload->do_upload('attached'))
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$this->load->view('jefatura/orden_form', $error);
+			} else {
+				$adjunto = $this->upload->data('file_name');
+			}
 
+			$config['file_name'] = $nombre;
+			$this->upload->initialize($config);
+			# despues carga el archivo
 			if (!$this->upload->do_upload('file'))
 			{
 				$error = array('error' => $this->upload->display_errors());
@@ -118,8 +131,8 @@ class Jefatura extends CI_Controller {
 			}
 			else
 			{
-				$upload_data = $this->upload->data();
-				$data = array('type' => $tipo, 'date' => $fecha, 'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo);
+				$archivo = $this->upload->data('file_name');
+				$data = array('type' => $tipo, 'date' => $fecha, 'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo, 'attached' => $adjunto);
 				$this->orden_model->insert($data);
 				redirect('jefatura/');
 			}

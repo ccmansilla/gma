@@ -35,6 +35,11 @@
 		<input type="file" name="file" size="20" />
 	<br />
 
+	<div class="form-group">
+	    <label class="control-label col-sm-2" for="attached">Adjunto: </label>
+		<input type="file" name="attached" size="20" />
+	</div>
+
     <div class="col-sm-offset-2 text-center pt-5">
     	<input type="submit" class="btn btn-light" name="submit" value="Guardar" />
         <button class="btn btn-light" onclick="window.history.back();" >Cancelar</button>

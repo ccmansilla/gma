@@ -37,10 +37,11 @@
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-		<th style="width: 10%;">Número</th>
+		<th style="width: 6%;">Número</th>
 		<th style="width: 50%;">Tema</th>
-		<th style="width: 10%;">Archivo</th>
-		<th style="width: 10%;">Vistos</th>
+		<th style="width: 8%;">Archivo</th>
+		<th style="width: 8%;">Adjunto</th>
+		<th style="width: 8%;">Vistos</th>
 		<th style="width: 20%;">Accion</th>
 		</tr>
 	</thead>
@@ -57,6 +58,13 @@
 				<a class="btn btn-light" href='<?php echo site_url('uploads/'.$order['file']); ?>' target="_blank"  title="abrir archivo">
 					<img src="<?= base_url('assets/images/file_open.png') ?>" width="20px">
 				</a>
+			</td>
+			<td>
+				<?php if($order['attached'] != ""){ ?>
+					<a class="btn btn-light" href='<?php echo site_url('uploads/'.$order['attached']); ?>' target="_blank"  title="abrir adjunto">
+						<img src='<?= base_url('assets/images/file_open.png') ?>' width='20px'>
+					</a>
+				<?php } ?>
 			</td>
 			<td>
 				<a class="btn btn-light" data-toggle="modal" onclick="modalVisto(<?= $id ?>, '<?= $numero ?>')" href="#"  title="listar vistos">   
