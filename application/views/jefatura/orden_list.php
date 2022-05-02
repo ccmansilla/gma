@@ -37,12 +37,12 @@
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-		<th style="width: 6%;">Número</th>
-		<th style="width: 50%;">Tema</th>
-		<th style="width: 8%;">Archivo</th>
-		<th style="width: 8%;">Adjunto</th>
-		<th style="width: 8%;">Vistos</th>
-		<th style="width: 20%;">Accion</th>
+		<th style="width: 10%;">Número</th>
+		<th style="width: 45%;">Tema</th>
+		<th style="width: 10%;">Archivo</th>
+		<th style="width: 10%;">Adjunto</th>
+		<th style="width: 10%;">Vistos</th>
+		<th style="width: 15%;"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -73,10 +73,10 @@
 			</td>
 	        <td class="text-center">
 				<a class="btn btn-light" href="<?= base_url('jefatura/order_edit/') . $id ?>" role="button"  title="editar orden">
-					<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">Editar
+					<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">
 				</a> 
 				<a class="btn btn-light" onclick="modalBorrar(<?= $id ?>, '<?= $numero ?>')" role="button"  title="borrar orden">
-					<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">Borrar
+					<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">
 				</a>
 			</td>
 	    </tr>

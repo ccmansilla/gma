@@ -36,8 +36,9 @@
 	<thead class="thead-dark">
 		<tr>
 		<th style="width: 10%;">Número</th>
-		<th style="width: 70%;">Tema</th>
+		<th style="width: 60%;">Tema</th>
 		<th style="width: 10%;">Archivo</th>
+		<th style="width: 10%;">Adjunto</th>
 		<th style="width: 10%;">Visto</th>
 		</tr>
 	</thead>
@@ -54,6 +55,13 @@
 				<a class="btn btn-light" href='<?php echo site_url('uploads/'.$order['file']); ?>' target="_blank" title="abrir archivo">
 					<img src="<?= base_url('assets/images/file_open.png') ?>" width="20px" >
 				</a>
+			</td>
+			<td>
+				<?php if($order['attached'] != ""){ ?>
+					<a class="btn btn-light" href='<?php echo site_url('uploads/'.$order['attached']); ?>' target="_blank"  title="abrir adjunto">
+						<img src='<?= base_url('assets/images/file_open.png') ?>' width='20px'>
+					</a>
+				<?php } ?>
 			</td>
 			<td>
 			<?php echo form_open("dependencia/view/$type/$from");?>	

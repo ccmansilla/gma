@@ -39,10 +39,10 @@
 		<tr>
 		<th style="width: 10%;">Número</th>
 		<th style="width: 20%;">Destino</th>
-		<th style="width: 30%;">Asunto</th>
+		<th style="width: 35%;">Asunto</th>
 		<th style="width: 10%;">Archivo</th>
 		<th style="width: 10%;">Visto</th>
-		<th style="width: 20%;"></th>
+		<th style="width: 15%;"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -72,10 +72,10 @@
 			</td>
 	        <td>
 				<a class="btn btn-light" href="<?= $edit_url . $id ?>" role="button" title="editar volante">
-					<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">Editar
+					<img src="<?= base_url('assets/images/edit.png') ?>" width="20px">
 				</a> 
 				<a class="btn btn-light" onclick="modalBorrar(<?= $id ?>, '<?= $numero ?>')"  role="button" title="borrar volante">
-					<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">Borrar
+					<img src="<?= base_url('assets/images/delete.png') ?>" width="20px">
 				</a>
 			</td>
 	    </tr>
