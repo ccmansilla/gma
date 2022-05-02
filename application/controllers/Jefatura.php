@@ -104,7 +104,7 @@ class Jefatura extends CI_Controller {
 			$nombre = $tipo.'_'.$year.'_'.$numero;
 			
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf|docx|zip';
+			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
 			$config['file_name'] = 'adj_'.$nombre;
 			
@@ -170,16 +170,55 @@ class Jefatura extends CI_Controller {
 			$year = date("y", strtotime($fecha)); 
 			$nombre = $tipo.'_'.$year.'_'.$numero;
 			$archivo = $nombre.'.pdf';
-			$archivo_anterior = $this->orden_model->get_file($id);
+			$order = $this->orden_model->get($id);
+			$archivo_anterior = $order['file'];
+			$adjunto_anterior = $order['attached'];
 
-			if (!empty($_FILES['file']['name'])) {
-				$config['upload_path']          = './uploads/';
-				$config['allowed_types']        = 'pdf';
-				$config['max_size']             = 10240;//archivo tamaño maximo 10mb
-				$config['file_name'] = $nombre;
+			$ext_archivo = explode(".", $archivo_anterior);
+			$ext_archivo = $ext_archivo[1];
+			
+			$ext_adjunto = explode(".", $adjunto_anterior);
+			$ext_adjunto = $ext_adjunto[1];
 
-				$this->load->library('upload', $config);
-				
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
+			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
+			$config['file_name'] = 'adj_'.$nombre;
+
+			$archivo = $nombre.'.'.$ext_archivo;
+			$adjunto = 'adj_'.$nombre.'.'.$ext_adjunto;
+
+			$this->load->library('upload', $config);
+			if (!empty($_FILES['attached']['name'])) {				
+				if(!unlink('./uploads/'.$adjunto_anterior))
+				{	
+					echo "No se pudo actualizar el archivo ".$adjunto_anterior;
+					exit();
+				}
+
+				if (!$this->upload->do_upload('attached'))
+				{
+					$error = array('error' => $this->upload->display_errors());
+					$this->load->view('orden_form', $error);
+				}
+				else
+				{
+					$adjunto = $this->upload->data('file_name');
+				}
+			} else {
+				$enlace_adjunto_anterior = './uploads/'.$adjunto_anterior;
+				$enlace_adjunto = './uploads/'.$adjunto;
+				if(!rename($enlace_adjunto_anterior, $enlace_adjunto)){
+					echo "Error no se pudo renombrar archivo ".$enlace_adjunto_anterior." por ".$enlace_adjunto;
+					exit();
+				}
+			}
+
+			
+			$config['file_name'] = $nombre;
+			$this->upload->initialize($config);
+
+			if (!empty($_FILES['file']['name'])) {				
 				if(!unlink('./uploads/'.$archivo_anterior))
 				{	
 					echo "No se pudo actualizar el archivo ".$archivo_anterior;
@@ -194,7 +233,7 @@ class Jefatura extends CI_Controller {
 				else
 				{
 					$upload_data = $this->upload->data();
-					$data = array('date' => $fecha,'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo);
+					$data = array('date' => $fecha,'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo, 'attached' => $adjunto);
 					$this->orden_model->update($id,$data);
 					redirect('jefatura/');
 				}
@@ -205,7 +244,7 @@ class Jefatura extends CI_Controller {
 					echo "Error no se pudo renombrar archivo ".$enlace_archivo_anterior." por ".$enlace_archivo;
 					exit();
 				}
-				$data = array('date' => $fecha,'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo);
+				$data = array('date' => $fecha,'number' => $numero, 'year' => $year, 'about' => $tema,'file' => $archivo, 'attached' => $adjunto);
 				$this->orden_model->update($id,$data);
 				redirect('jefatura/');
 			}
@@ -488,7 +527,6 @@ class Jefatura extends CI_Controller {
 			}
 		}
 	}
-
 
 	public function volante_delete($id)
 	{
