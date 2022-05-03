@@ -290,7 +290,7 @@ class Dependencia extends CI_Controller {
 			$this->load->view('templates/footer');
 
 		} else {
-
+			
 			$fecha = $this->input->post('fecha');
 			$numero = $this->input->post('numero');
 			$year = date("y", strtotime($fecha));
@@ -301,20 +301,67 @@ class Dependencia extends CI_Controller {
 			
 			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero;
 			$archivo = $nombre.'.pdf';
-			$archivo_anterior = $this->volante_model->get_file($id);
+
+			$volante = $this->volante_model->get($id);
+			$adjunto_anterior = $volante['enlace_adjunto'];
+			$archivo_anterior = $volante['enlace_archivo'];
+
+			$ext_archivo = explode(".", $archivo_anterior);
+			$ext_archivo = $ext_archivo[1];
+			
+			$ext_adjunto = '';
+			if($adjunto_anterior != ''){
+				$ext_adjunto = explode(".", $adjunto_anterior);
+				$ext_adjunto = $ext_adjunto[1];
+			}
+
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
+			$config['file_name'] = 'adj_'.$nombre;
+
+			$archivo = $nombre.'.'.$ext_archivo;
+			$adjunto = 'adj_'.$nombre.'.'.$ext_adjunto;
+
+			$this->load->library('upload', $config);
+			if (!empty($_FILES['adjunto']['name'])) {		
+				if($adjunto_anterior != ''){
+					if(!unlink('./uploads/'.$adjunto_anterior)){	
+						echo "No se pudo actualizar el archivo ".$adjunto_anterior;
+						exit();
+					}
+				}		
+
+				if (!$this->upload->do_upload('adjunto'))
+				{
+					$error = array('error' => $this->upload->display_errors());
+					$this->load->view('dependencia/volante_form', $error);
+				}
+				else
+				{
+					$adjunto = $this->upload->data('file_name');
+				}
+			} else {
+				if($adjunto_anterior != ''){
+					$enlace_adjunto_anterior = './uploads/'.$adjunto_anterior;
+					$enlace_adjunto = './uploads/'.$adjunto;
+					if(!rename($enlace_adjunto_anterior, $enlace_adjunto)){
+						echo "Error no se pudo renombrar archivo ".$enlace_adjunto_anterior." por ".$enlace_adjunto;
+						exit();
+					}
+				} else {
+					$adjunto = '';
+				}
+			}
+			
+			$config['file_name'] = $nombre;
+			$this->upload->initialize($config);
 
 			if (!empty($_FILES['file']['name'])) {
-				$config['upload_path']          = './uploads/';
-				$config['allowed_types']        = 'pdf';
-				$config['max_size']             = 10240;//archivo tamaño maximo 10mb
-				$config['file_name'] = $nombre;
-
 				if(!unlink('./uploads/'.$archivo_anterior)){	
 					echo "No se pudo actualizar el archivo ".$archivo_anterior;
 					exit();
 				}
-
-				$this->load->library('upload', $config);
 
 				if (!$this->upload->do_upload('file')){
 					$error = array('error' => $this->upload->display_errors());
@@ -337,18 +384,24 @@ class Dependencia extends CI_Controller {
 					exit();
 				}
 				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
-									'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
+									'enlace_archivo' => $archivo, 'enlace_adjunto' => $adjunto,'id_user_origen' => $id_user_origen, 
 									'id_user_destino' => $id_user_destino, 'visto' => 0);
 				$this->volante_model->update($id, $data);
 				redirect('dependencia/volante_enviados');
 			}
-		}
+		
+		}	
 	}
 
 	public function volante_delete($id)
-	{
+	{		
 		$volante = $this->volante_model->get($id);
+		$adjunto = $volante['enlace_adjunto'];
 		$archivo = $volante['enlace_archivo'];
+		if(!unlink('./uploads/'.$adjunto)){	
+			echo "No se pudo borrar el adjunto";
+			exit();
+		}
 		if(unlink('./uploads/'.$archivo)){	
 			$this->volante_model->delete($id);
 		} else {
