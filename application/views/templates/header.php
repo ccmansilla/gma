@@ -164,11 +164,15 @@
 				}
 
 				.btn:hover {
+                    background-color: gray;
+                    color: white;
 					border: 1px black solid;
 				}
 
                 .btn-light {
-                    background-color: #AECC0D;
+                    /*background-color: #AECC0D;*/
+                    background-color: black;
+                    color: white;
                 }
 
                 .modal-header{
