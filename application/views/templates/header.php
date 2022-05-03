@@ -172,7 +172,7 @@
 
                 .btn-light {
                     /*background-color: #AECC0D;*/
-                    background-color: #243471;
+                    background-color: #006AB6;
                     color: white;
                 }
 
