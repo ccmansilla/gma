@@ -23,7 +23,7 @@
                 }
 
                 .nav__dropdown__bg {
-                    background-color: #F9ED93; /*#F6F2D4;*/
+                    background-color: #C2CEDB; /* #F9ED93 /*#F6F2D4;*/
                 }
 
                 .nav__dropdown__color {
