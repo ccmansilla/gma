@@ -189,12 +189,13 @@ class Jefatura extends CI_Controller {
 			$adjunto = 'adj_'.$nombre.'.'.$ext_adjunto;
 
 			$this->load->library('upload', $config);
-			if (!empty($_FILES['attached']['name'])) {				
-				if(!unlink('./uploads/'.$adjunto_anterior))
-				{	
-					echo "No se pudo actualizar el archivo ".$adjunto_anterior;
-					exit();
-				}
+			if (!empty($_FILES['attached']['name'])) {		
+				if($adjunto_anterior != ''){
+					if(!unlink('./uploads/'.$adjunto_anterior)){	
+						echo "No se pudo actualizar el archivo ".$adjunto_anterior;
+						exit();
+					}
+				}		
 
 				if (!$this->upload->do_upload('attached'))
 				{
