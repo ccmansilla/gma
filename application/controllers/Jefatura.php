@@ -525,7 +525,7 @@ class Jefatura extends CI_Controller {
 			}
 
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf';
+			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
 			$config['file_name'] = 'adj_'.$nombre;
 

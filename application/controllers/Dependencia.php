@@ -239,7 +239,7 @@ class Dependencia extends CI_Controller {
 			$archivo = $nombre.'.pdf';
 			
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf';
+			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
 			$config['file_name'] = $nombre;
 
@@ -248,7 +248,7 @@ class Dependencia extends CI_Controller {
 			if ( ! $this->upload->do_upload('file'))
 			{
 				$error = array('error' => $this->upload->display_errors());
-				$this->load->view('dependencia/volante_form', $error);
+				$this->load->view('volante/volante_form', $error);
 			}
 			else
 			{
@@ -316,7 +316,7 @@ class Dependencia extends CI_Controller {
 			}
 
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf';
+			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
 			$config['file_name'] = 'adj_'.$nombre;
 
@@ -335,7 +335,7 @@ class Dependencia extends CI_Controller {
 				if (!$this->upload->do_upload('adjunto'))
 				{
 					$error = array('error' => $this->upload->display_errors());
-					$this->load->view('dependencia/volante_form', $error);
+					$this->load->view('volante/volante_form', $error);
 				}
 				else
 				{
@@ -365,7 +365,7 @@ class Dependencia extends CI_Controller {
 
 				if (!$this->upload->do_upload('file')){
 					$error = array('error' => $this->upload->display_errors());
-					$this->load->view('dependencia/volante_form', $error);
+					$this->load->view('volante/volante_form', $error);
 				}
 				else
 				{
