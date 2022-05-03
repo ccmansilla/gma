@@ -177,8 +177,11 @@ class Jefatura extends CI_Controller {
 			$ext_archivo = explode(".", $archivo_anterior);
 			$ext_archivo = $ext_archivo[1];
 			
-			$ext_adjunto = explode(".", $adjunto_anterior);
-			$ext_adjunto = $ext_adjunto[1];
+			$ext_adjunto = '';
+			if($adjunto_anterior != '') {
+				$ext_adjunto = explode(".", $adjunto_anterior);
+				$ext_adjunto = $ext_adjunto[1];
+			}
 
 			$config['upload_path']          = './uploads/';
 			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
@@ -200,7 +203,7 @@ class Jefatura extends CI_Controller {
 				if (!$this->upload->do_upload('attached'))
 				{
 					$error = array('error' => $this->upload->display_errors());
-					$this->load->view('orden_form', $error);
+					$this->load->view('jefatura/orden_form', $error);
 				}
 				else
 				{
@@ -234,7 +237,7 @@ class Jefatura extends CI_Controller {
 				if (!$this->upload->do_upload('file'))
 				{
 					$error = array('error' => $this->upload->display_errors());
-					$this->load->view('orden_form', $error);
+					$this->load->view('jefatura/orden_form', $error);
 				}
 				else
 				{
@@ -260,7 +263,12 @@ class Jefatura extends CI_Controller {
 	public function order_delete($id)
 	{
 		$order = $this->orden_model->get($id);
+		$adjunto = $order['attached'];
 		$archivo = $order['file'];
+		if(!unlink('./uploads/'.$adjunto)){
+			echo "No se pudo borrar el adjunto";
+			exit();
+		}
 		if(unlink('./uploads/'.$archivo)){	
 			$this->orden_model->delete($id);
 		} else {
@@ -510,7 +518,7 @@ class Jefatura extends CI_Controller {
 			$ext_archivo = explode(".", $archivo_anterior);
 			$ext_archivo = $ext_archivo[1];
 			
-			$ext_archivo = '';
+			$ext_adjunto = '';
 			if($adjunto_anterior != ''){
 				$ext_adjunto = explode(".", $adjunto_anterior);
 				$ext_adjunto = $ext_adjunto[1];
@@ -525,7 +533,7 @@ class Jefatura extends CI_Controller {
 			$adjunto = 'adj_'.$nombre.'.'.$ext_adjunto;
 
 			$this->load->library('upload', $config);
-			if (!empty($_FILES['attached']['name'])) {		
+			if (!empty($_FILES['adjunto']['name'])) {		
 				if($adjunto_anterior != ''){
 					if(!unlink('./uploads/'.$adjunto_anterior)){	
 						echo "No se pudo actualizar el archivo ".$adjunto_anterior;
@@ -533,10 +541,10 @@ class Jefatura extends CI_Controller {
 					}
 				}		
 
-				if (!$this->upload->do_upload('attached'))
+				if (!$this->upload->do_upload('adjunto'))
 				{
 					$error = array('error' => $this->upload->display_errors());
-					$this->load->view('orden_form', $error);
+					$this->load->view('jefatura/volante_form', $error);
 				}
 				else
 				{
@@ -596,7 +604,12 @@ class Jefatura extends CI_Controller {
 	public function volante_delete($id)
 	{
 		$volante = $this->volante_model->get($id);
+		$adjunto = $volante['enlace_adjunto'];
 		$archivo = $volante['enlace_archivo'];
+		if(!unlink('./uploads/'.$adjunto)){	
+			echo "No se pudo borrar el adjunto";
+			exit();
+		}
 		if(unlink('./uploads/'.$archivo)){	
 			$this->volante_model->delete($id);
 		} else {
