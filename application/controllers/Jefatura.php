@@ -497,14 +497,16 @@ class Jefatura extends CI_Controller {
 			
 			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero;
 			$archivo = $nombre.'.pdf';
-			$archivo_anterior = $this->volante_model->get_file($id);
+			$volante = $this->volante_model->get($id);
+			$adjunto_anterior = $volante['enlace_adjunto'];
+			$archivo_anterior = $volante['enlace_archivo'];
+
+			$config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'pdf';
+			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
+			$config['file_name'] = $nombre;
 
 			if (!empty($_FILES['file']['name'])) {
-				$config['upload_path']          = './uploads/';
-				$config['allowed_types']        = 'pdf';
-				$config['max_size']             = 10240;//archivo tamaño maximo 10mb
-				$config['file_name'] = $nombre;
-
 				if(!unlink('./uploads/'.$archivo_anterior)){	
 					echo "No se pudo actualizar el archivo ".$archivo_anterior;
 					exit();
