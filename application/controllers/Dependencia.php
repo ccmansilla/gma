@@ -112,7 +112,7 @@ class Dependencia extends CI_Controller {
 		$data['fyear'] = $fyear;
 		$data['fasunto'] = $fasunto;
 
-		$result = $this->volante_model->get_list_enviados($id_user, $limit, $from);
+		$result = $this->volante_model->get_list_enviados($id_user, $limit, $from, $where);
 		$data['volantes'] = $result['data'];
 		$data['title'] = 'Volantes Enviados';
 		$data['menu'] = getMenu($this->session->role);
