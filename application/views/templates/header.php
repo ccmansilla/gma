@@ -161,17 +161,18 @@
 
 				.btn {
 					border: 1px black solid;
+                    font-weight: bold;
 				}
 
 				.btn:hover {
-                    background-color: gray;
+                    background-color: #92a0d0;
                     color: white;
 					border: 1px black solid;
 				}
 
                 .btn-light {
                     /*background-color: #AECC0D;*/
-                    background-color: black;
+                    background-color: #243471;
                     color: white;
                 }
 
