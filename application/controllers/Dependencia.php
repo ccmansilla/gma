@@ -228,39 +228,47 @@ class Dependencia extends CI_Controller {
 		{
 			$fecha = $this->input->post('fecha');
 			$numero = $this->input->post('numero');
-			$year = date("y", strtotime($fecha)); 
-
+			$year = date("y", strtotime($fecha));
 			$asunto = $this->input->post('asunto');
 
 			$id_user_origen = $this->session->id_user;
 			$id_user_destino = $this->input->post('destino');
 			
 			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero;
-			$archivo = $nombre.'.pdf';
 			
 			$config['upload_path']          = './uploads/';
 			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
-			$config['file_name'] = $nombre;
+			$config['file_name'] = 'adj_'.$nombre;
+
+			$adjunto = '';
+			$archivo = '';
 
 			$this->load->library('upload', $config);
 
-			if ( ! $this->upload->do_upload('file'))
-			{
+			if ( ! $this->upload->do_upload('adjunto')){
+				$error = array('error' => $this->upload->display_errors());
+				$this->load->view('volante/volante_form', $error);
+			} else {
+				$adjunto = $this->upload->data('file_name');
+			}
+
+			$config['file_name'] = $nombre;
+			$this->upload->initialize($config);
+
+			if ( ! $this->upload->do_upload('file')){
 				$error = array('error' => $this->upload->display_errors());
 				$this->load->view('volante/volante_form', $error);
 			}
 			else
 			{
-				
-				$upload_data = $this->upload->data();
+				$archivo = $this->upload->data('file_name');
 				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
-								'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
-								'id_user_destino' => $id_user_destino);
+								'enlace_archivo' => $archivo, 'enlace_adjunto' => $adjunto, 
+								'id_user_origen' => $id_user_origen, 'id_user_destino' => $id_user_destino);
 				$this->volante_model->insert($data);
 				redirect('dependencia/volante_enviados');
-			}
-			
+			}			
 		}
 	}
 

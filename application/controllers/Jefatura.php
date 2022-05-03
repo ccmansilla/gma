@@ -450,7 +450,7 @@ class Jefatura extends CI_Controller {
 
 			if ( ! $this->upload->do_upload('adjunto')){
 				$error = array('error' => $this->upload->display_errors());
-				$this->load->view('jefatura/volante_form', $error);
+				$this->load->view('volante/volante_form', $error);
 			} else {
 				$adjunto = $this->upload->data('file_name');
 			}
@@ -460,7 +460,7 @@ class Jefatura extends CI_Controller {
 
 			if ( ! $this->upload->do_upload('file')){
 				$error = array('error' => $this->upload->display_errors());
-				$this->load->view('jefatura/volante_form', $error);
+				$this->load->view('volante/volante_form', $error);
 			}
 			else
 			{
