@@ -265,9 +265,11 @@ class Jefatura extends CI_Controller {
 		$order = $this->orden_model->get($id);
 		$adjunto = $order['attached'];
 		$archivo = $order['file'];
-		if(!unlink('./uploads/'.$adjunto)){
-			echo "No se pudo borrar el adjunto";
-			exit();
+		if($adjunto != ''){
+			if(!unlink('./uploads/'.$adjunto)){
+				echo "No se pudo borrar el adjunto";
+				exit();
+			}
 		}
 		if(unlink('./uploads/'.$archivo)){	
 			$this->orden_model->delete($id);
