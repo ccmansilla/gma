@@ -552,11 +552,13 @@ class Jefatura extends CI_Controller {
 				}
 			} else {
 				if($adjunto_anterior != ''){
-					$enlace_adjunto_anterior = './uploads/'.$adjunto_anterior;
-					$enlace_adjunto = './uploads/'.$adjunto;
-					if(!rename($enlace_adjunto_anterior, $enlace_adjunto)){
-						echo "Error no se pudo renombrar archivo ".$enlace_adjunto_anterior." por ".$enlace_adjunto;
-						exit();
+					if($adjunto_anterior != $adjunto){
+						$enlace_adjunto_anterior = './uploads/'.$adjunto_anterior;
+						$enlace_adjunto = './uploads/'.$adjunto;
+						if(!rename($enlace_adjunto_anterior, $enlace_adjunto)){
+							echo "Error no se pudo renombrar archivo ".$enlace_adjunto_anterior." por ".$enlace_adjunto;
+							exit();
+						}
 					}
 				} else {
 					$adjunto = '';
@@ -588,9 +590,11 @@ class Jefatura extends CI_Controller {
 			} else {
 				$enlace_archivo_anterior = './uploads/'.$archivo_anterior;
 				$enlace_archivo = './uploads/'.$archivo;
-				if(!rename($enlace_archivo_anterior, $enlace_archivo)){
-					echo "Error no se pudo renombrar archivo ".$enlace_archivo_anterior." por ".$enlace_archivo;
-					exit();
+				if($archivo_anterior != $archivo){
+					if(!rename($enlace_archivo_anterior, $enlace_archivo)){
+						echo "Error no se pudo renombrar archivo ".$enlace_archivo_anterior." por ".$enlace_archivo;
+						exit();
+					}
 				}
 				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
 									'enlace_archivo' => $archivo, 'enlace_adjunto' => $adjunto,'id_user_origen' => $id_user_origen, 
