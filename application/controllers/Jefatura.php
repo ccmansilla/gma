@@ -177,8 +177,11 @@ class Jefatura extends CI_Controller {
 			$ext_archivo = explode(".", $archivo_anterior);
 			$ext_archivo = $ext_archivo[1];
 			
-			$ext_adjunto = explode(".", $adjunto_anterior);
-			$ext_adjunto = $ext_adjunto[1];
+			$ext_adjunto = '';
+			if($adjunto_anterior != '') {
+				$ext_adjunto = explode(".", $adjunto_anterior);
+				$ext_adjunto = $ext_adjunto[1];
+			}
 
 			$config['upload_path']          = './uploads/';
 			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
@@ -200,19 +203,24 @@ class Jefatura extends CI_Controller {
 				if (!$this->upload->do_upload('attached'))
 				{
 					$error = array('error' => $this->upload->display_errors());
-					$this->load->view('orden_form', $error);
+					$this->load->view('jefatura/orden_form', $error);
 				}
 				else
 				{
 					$adjunto = $this->upload->data('file_name');
 				}
 			} else {
-				$enlace_adjunto_anterior = './uploads/'.$adjunto_anterior;
-				$enlace_adjunto = './uploads/'.$adjunto;
-				if(!rename($enlace_adjunto_anterior, $enlace_adjunto)){
-					echo "Error no se pudo renombrar archivo ".$enlace_adjunto_anterior." por ".$enlace_adjunto;
-					exit();
+				if($adjunto_anterior != ''){
+					$enlace_adjunto_anterior = './uploads/'.$adjunto_anterior;
+					$enlace_adjunto = './uploads/'.$adjunto;
+					if(!rename($enlace_adjunto_anterior, $enlace_adjunto)){
+						echo "Error no se pudo renombrar archivo ".$enlace_adjunto_anterior." por ".$enlace_adjunto;
+						exit();
+					}
+				} else {
+					$adjunto = '';
 				}
+				
 			}
 
 			
@@ -229,7 +237,7 @@ class Jefatura extends CI_Controller {
 				if (!$this->upload->do_upload('file'))
 				{
 					$error = array('error' => $this->upload->display_errors());
-					$this->load->view('orden_form', $error);
+					$this->load->view('jefatura/orden_form', $error);
 				}
 				else
 				{
@@ -255,7 +263,14 @@ class Jefatura extends CI_Controller {
 	public function order_delete($id)
 	{
 		$order = $this->orden_model->get($id);
+		$adjunto = $order['attached'];
 		$archivo = $order['file'];
+		if($adjunto != ''){
+			if(!unlink('./uploads/'.$adjunto)){
+				echo "No se pudo borrar el adjunto";
+				exit();
+			}
+		}
 		if(unlink('./uploads/'.$archivo)){	
 			$this->orden_model->delete($id);
 		} else {
@@ -437,7 +452,7 @@ class Jefatura extends CI_Controller {
 
 			if ( ! $this->upload->do_upload('adjunto')){
 				$error = array('error' => $this->upload->display_errors());
-				$this->load->view('jefatura/volante_form', $error);
+				$this->load->view('volante/volante_form', $error);
 			} else {
 				$adjunto = $this->upload->data('file_name');
 			}
@@ -447,7 +462,7 @@ class Jefatura extends CI_Controller {
 
 			if ( ! $this->upload->do_upload('file')){
 				$error = array('error' => $this->upload->display_errors());
-				$this->load->view('jefatura/volante_form', $error);
+				$this->load->view('volante/volante_form', $error);
 			}
 			else
 			{
@@ -497,22 +512,69 @@ class Jefatura extends CI_Controller {
 			
 			$nombre = 'vol_'.$id_user_origen.'_'.$year.'_'.$numero;
 			$archivo = $nombre.'.pdf';
+
 			$volante = $this->volante_model->get($id);
 			$adjunto_anterior = $volante['enlace_adjunto'];
 			$archivo_anterior = $volante['enlace_archivo'];
 
+			$ext_archivo = explode(".", $archivo_anterior);
+			$ext_archivo = $ext_archivo[1];
+			
+			$ext_adjunto = '';
+			if($adjunto_anterior != ''){
+				$ext_adjunto = explode(".", $adjunto_anterior);
+				$ext_adjunto = $ext_adjunto[1];
+			}
+
 			$config['upload_path']          = './uploads/';
-			$config['allowed_types']        = 'pdf';
+			$config['allowed_types']        = 'pdf|docx|xlsx|zip';
 			$config['max_size']             = 10240;//archivo tamaño maximo 10mb
+			$config['file_name'] = 'adj_'.$nombre;
+
+			$archivo = $nombre.'.'.$ext_archivo;
+			$adjunto = 'adj_'.$nombre.'.'.$ext_adjunto;
+
+			$this->load->library('upload', $config);
+			if (!empty($_FILES['adjunto']['name'])) {		
+				if($adjunto_anterior != ''){
+					if(!unlink('./uploads/'.$adjunto_anterior)){	
+						echo "No se pudo actualizar el archivo ".$adjunto_anterior;
+						exit();
+					}
+				}		
+
+				if (!$this->upload->do_upload('adjunto'))
+				{
+					$error = array('error' => $this->upload->display_errors());
+					$this->load->view('jefatura/volante_form', $error);
+				}
+				else
+				{
+					$adjunto = $this->upload->data('file_name');
+				}
+			} else {
+				if($adjunto_anterior != ''){
+					if($adjunto_anterior != $adjunto){
+						$enlace_adjunto_anterior = './uploads/'.$adjunto_anterior;
+						$enlace_adjunto = './uploads/'.$adjunto;
+						if(!rename($enlace_adjunto_anterior, $enlace_adjunto)){
+							echo "Error no se pudo renombrar archivo ".$enlace_adjunto_anterior." por ".$enlace_adjunto;
+							exit();
+						}
+					}
+				} else {
+					$adjunto = '';
+				}
+			}
+			
 			$config['file_name'] = $nombre;
+			$this->upload->initialize($config);
 
 			if (!empty($_FILES['file']['name'])) {
 				if(!unlink('./uploads/'.$archivo_anterior)){	
 					echo "No se pudo actualizar el archivo ".$archivo_anterior;
 					exit();
 				}
-
-				$this->load->library('upload', $config);
 
 				if (!$this->upload->do_upload('file')){
 					$error = array('error' => $this->upload->display_errors());
@@ -530,12 +592,14 @@ class Jefatura extends CI_Controller {
 			} else {
 				$enlace_archivo_anterior = './uploads/'.$archivo_anterior;
 				$enlace_archivo = './uploads/'.$archivo;
-				if(!rename($enlace_archivo_anterior, $enlace_archivo)){
-					echo "Error no se pudo renombrar archivo ".$enlace_archivo_anterior." por ".$enlace_archivo;
-					exit();
+				if($archivo_anterior != $archivo){
+					if(!rename($enlace_archivo_anterior, $enlace_archivo)){
+						echo "Error no se pudo renombrar archivo ".$enlace_archivo_anterior." por ".$enlace_archivo;
+						exit();
+					}
 				}
 				$data = array('fecha' => $fecha, 'numero' => $numero, 'year' => $year, 'asunto' => $asunto,
-									'enlace_archivo' => $archivo, 'id_user_origen' => $id_user_origen, 
+									'enlace_archivo' => $archivo, 'enlace_adjunto' => $adjunto,'id_user_origen' => $id_user_origen, 
 									'id_user_destino' => $id_user_destino, 'visto' => 0);
 				$this->volante_model->update($id, $data);
 				redirect('jefatura/volante_enviados');
@@ -546,7 +610,12 @@ class Jefatura extends CI_Controller {
 	public function volante_delete($id)
 	{
 		$volante = $this->volante_model->get($id);
+		$adjunto = $volante['enlace_adjunto'];
 		$archivo = $volante['enlace_archivo'];
+		if(!unlink('./uploads/'.$adjunto)){	
+			echo "No se pudo borrar el adjunto";
+			exit();
+		}
 		if(unlink('./uploads/'.$archivo)){	
 			$this->volante_model->delete($id);
 		} else {

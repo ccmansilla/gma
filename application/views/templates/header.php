@@ -23,7 +23,7 @@
                 }
 
                 .nav__dropdown__bg {
-                    background-color: #F9ED93; /*#F6F2D4;*/
+                    background-color: #C2CEDB; /* #F9ED93 /*#F6F2D4;*/
                 }
 
                 .nav__dropdown__color {
@@ -161,14 +161,19 @@
 
 				.btn {
 					border: 1px black solid;
+                    font-weight: bold;
 				}
 
 				.btn:hover {
+                    background-color: #92a0d0;
+                    color: white;
 					border: 1px black solid;
 				}
 
                 .btn-light {
-                    background-color: #AECC0D;
+                    /*background-color: #AECC0D;*/
+                    background-color: #006AB6;
+                    color: white;
                 }
 
                 .modal-header{

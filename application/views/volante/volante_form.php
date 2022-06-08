@@ -13,7 +13,7 @@
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="numero">Numero: </label>
-		<input type="number" class="form-control" id="numero" name="numero" value="<?= $numero ?>" /> 
+		<input type="number" class="form-control" id="numero" name="numero" value="<?= $numero ?>" required /> 
 	</div>
 
 	<div class="form-group">
@@ -23,7 +23,7 @@
 
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="tema">Asunto: </label>
-	    <textarea class="form-control" id="asunto" name="asunto"><?=isset($asunto)? $asunto : ''?>
+	    <textarea class="form-control" id="asunto" name="asunto" required ><?=isset($asunto)? $asunto : ''?>
 		</textarea><br />
 	</div>
 	

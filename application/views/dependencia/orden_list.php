@@ -57,6 +57,13 @@
 				</a>
 			</td>
 			<td>
+				<?php if($order['attached'] != ""){ ?>
+					<a class="btn btn-light" href='<?php echo site_url('uploads/'.$order['attached']); ?>' target="_blank"  title="abrir adjunto">
+						<img src='<?= base_url('assets/images/file_open.png') ?>' width='20px'>
+					</a>
+				<?php } ?>
+			</td>
+			<td>
 			<?php echo form_open("dependencia/view/$type/$from");?>	
 				<?php
 					$id = $order['id'];

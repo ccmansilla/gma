@@ -17,17 +17,17 @@
 	
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="fecha">Fecha: </label>
-	    <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo (isset ($order))? $order['date'] : ''?>" /><br />
+	    <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo (isset ($order))? $order['date'] : ''?>" required /><br />
 	</div>
 	
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="numero">Numero: </label>
-	    <input type="text" class="form-control" id="numero" name="numero" value="<?php echo (isset ($order))? $order['number'] : ''?>" /><br />
+	    <input type="text" class="form-control" id="numero" name="numero" value="<?php echo (isset ($order))? $order['number'] : ''?>" required /><br />
 	</div>
 	
 	<div class="form-group">
 	    <label class="control-label col-sm-2" for="tema">Tema: </label>
-	    <textarea class="form-control" id="tema" name="tema"><?php echo (isset ($order))? $order['about'] : '' ?></textarea><br />
+	    <textarea class="form-control" id="tema" name="tema"  required ><?php echo (isset ($order))? $order['about'] : '' ?></textarea><br />
 	</div>
 	
 	<div class="form-group">
